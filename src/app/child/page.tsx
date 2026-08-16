@@ -54,11 +54,11 @@ export default function ChildDashboard() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Hi {child.name}</h1>
-          <p className="text-sm text-black/50 dark:text-white/50 mt-1">
+          <p className="text-sm text-muted-foreground mt-1">
             Keeping an eye on {parent.name} ({parent.condition})
           </p>
         </div>
-        <p className="text-sm text-black/40 dark:text-white/40 shrink-0 pt-1">{formatFullDate()}</p>
+        <p className="text-sm text-muted-foreground shrink-0 pt-1">{formatFullDate()}</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -108,12 +108,12 @@ export default function ChildDashboard() {
                   <Link href={`/parent/appointments/${a.id}`} className="text-sm font-medium hover:underline">
                     {a.name}
                   </Link>
-                  <p className="text-xs text-black/40 dark:text-white/40">{formatDateTime(a.appointmentTime)}</p>
+                  <p className="text-xs text-muted-foreground">{formatDateTime(a.appointmentTime)}</p>
                 </div>
                 <StatusBadge status={a.status} />
               </li>
             ))}
-            {upcoming.length === 0 && <p className="text-sm text-black/40">Nothing scheduled.</p>}
+            {upcoming.length === 0 && <p className="text-sm text-muted-foreground">Nothing scheduled.</p>}
           </ul>
         </Card>
 
@@ -121,15 +121,15 @@ export default function ChildDashboard() {
           <CardTitle>Parent snapshot</CardTitle>
           <dl className="grid grid-cols-2 gap-3 text-sm">
             <div>
-              <dt className="text-black/40 dark:text-white/40">Name</dt>
+              <dt className="text-muted-foreground">Name</dt>
               <dd className="font-medium">{parent.name}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Condition</dt>
+              <dt className="text-muted-foreground">Condition</dt>
               <dd className="font-medium">{parent.condition}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Prescriptions</dt>
+              <dt className="text-muted-foreground">Prescriptions</dt>
               <dd className="font-medium">
                 {prescriptions.map((p, i) => (
                   <span key={p.id}>
@@ -142,7 +142,7 @@ export default function ChildDashboard() {
               </dd>
             </div>
           </dl>
-          <Link href="/child/account" className="text-xs text-black/40 hover:underline mt-4 inline-block">
+          <Link href="/child/account" className="text-xs text-muted-foreground hover:underline mt-4 inline-block">
             View account →
           </Link>
         </Card>

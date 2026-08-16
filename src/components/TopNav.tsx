@@ -23,9 +23,9 @@ export default function TopNav() {
   const links = section === "parent" ? PARENT_LINKS : section === "child" ? CHILD_LINKS : [];
 
   return (
-    <header className="border-b border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/30 backdrop-blur sticky top-0 z-10">
+    <header className="border-b border-border bg-background/70 backdrop-blur sticky top-0 z-10">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
-        <Link href="/" className="font-semibold tracking-tight text-lg shrink-0">
+        <Link href="/" className="font-display font-semibold tracking-tight text-lg shrink-0">
           Eldercare
         </Link>
 
@@ -39,8 +39,8 @@ export default function TopNav() {
                   href={link.href}
                   className={`px-3 py-1.5 rounded-full whitespace-nowrap transition-colors ${
                     active
-                      ? "bg-black text-white dark:bg-white dark:text-black"
-                      : "text-black/60 dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/10"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-accent"
                   }`}
                 >
                   {link.label}
@@ -52,13 +52,13 @@ export default function TopNav() {
 
         <div className="ml-auto flex items-center gap-2 text-sm shrink-0">
           {section && (
-            <span className="hidden sm:inline text-black/40 dark:text-white/40">
+            <span className="hidden sm:inline text-muted-foreground">
               Viewing as {section === "parent" ? "Parent" : "Child"}
             </span>
           )}
           <Link
             href="/"
-            className="px-3 py-1.5 rounded-full border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"
+            className="px-3 py-1.5 rounded-full border border-border hover:bg-accent"
           >
             Switch view
           </Link>

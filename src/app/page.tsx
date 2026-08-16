@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 py-16">
       <main className="w-full max-w-xl flex flex-col items-center text-center gap-6">
-        <span className="rounded-full border border-black/10 dark:border-white/15 px-3 py-1 text-xs font-medium tracking-wide text-zinc-600 dark:text-zinc-400 uppercase">
+        <span className="rounded-full border border-border px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Demo v1
         </span>
         <h1 className="text-4xl font-semibold tracking-tight">Eldercare Concierge</h1>
-        <p className="text-zinc-600 dark:text-zinc-400 max-w-md">
+        <p className="text-muted-foreground max-w-md">
           Remote care management for adult children keeping an eye on their parents —
           appointments, prescriptions, wearable alerts, and documents in one place.
         </p>
@@ -22,23 +22,23 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 gap-4 w-full mt-4">
           <Link
             href="/parent"
-            className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 p-6 text-left hover:border-black/30 dark:hover:border-white/30 transition-colors"
+            className="rounded-2xl border border-border bg-card p-6 text-left hover:border-ring/50 transition-colors"
           >
-            <p className="text-xs uppercase tracking-wide text-zinc-500">View as</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">View as</p>
             <p className="text-lg font-semibold mt-1">Parent</p>
-            <p className="text-sm text-zinc-500 mt-1">{parent.name}, {parent.age}</p>
+            <p className="text-sm text-muted-foreground mt-1">{parent.name}, {parent.age}</p>
           </Link>
           <Link
             href="/child"
-            className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 p-6 text-left hover:border-black/30 dark:hover:border-white/30 transition-colors"
+            className="rounded-2xl border border-border bg-card p-6 text-left hover:border-ring/50 transition-colors"
           >
-            <p className="text-xs uppercase tracking-wide text-zinc-500">View as</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">View as</p>
             <p className="text-lg font-semibold mt-1">Child</p>
-            <p className="text-sm text-zinc-500 mt-1">{child.name}, {child.age}</p>
+            <p className="text-sm text-muted-foreground mt-1">{child.name}, {child.age}</p>
           </Link>
         </div>
 
-        <Link href="/signup" className="text-sm text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline mt-2">
+        <Link href="/signup" className="text-sm text-muted-foreground hover:text-foreground underline mt-2">
           Or start the signup flow →
         </Link>
       </main>

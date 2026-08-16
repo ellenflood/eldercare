@@ -24,7 +24,7 @@ export default function ChildAccountPage() {
         <dl className="grid grid-cols-2 gap-4 text-sm">
           {fields.map(([label, value]) => (
             <div key={label}>
-              <dt className="text-black/40 dark:text-white/40">{label}</dt>
+              <dt className="text-muted-foreground">{label}</dt>
               <dd className="font-medium mt-0.5">{value}</dd>
             </div>
           ))}

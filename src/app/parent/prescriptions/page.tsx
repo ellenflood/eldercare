@@ -29,7 +29,7 @@ export default function PrescriptionsPage() {
                 <Link href={`/parent/prescriptions/${rx.id}`} className="font-medium hover:underline">
                   {rx.name}
                 </Link>
-                <p className="text-xs text-black/40 dark:text-white/40 mt-0.5">
+                <p className="text-xs text-muted-foreground mt-0.5">
                   {rx.specialty} · {rx.dosage}
                   {rx.dosageUnit} · {rx.frequency} · since {formatDate(rx.startDate)}
                 </p>
@@ -41,11 +41,11 @@ export default function PrescriptionsPage() {
             </div>
 
             <div className="mt-4">
-              <p className="text-xs uppercase tracking-wide text-black/40 dark:text-white/40 mb-2">Recent doses</p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Recent doses</p>
               <ul className="space-y-1.5">
                 {doseHistory(rx.id).slice(0, 4).map((r) => (
                   <li key={r.id} className="flex items-center justify-between text-sm">
-                    <span className="text-black/60 dark:text-white/60">{formatDate(r.dueTime)}</span>
+                    <span className="text-muted-foreground">{formatDate(r.dueTime)}</span>
                     <StatusBadge status={r.status} />
                   </li>
                 ))}
@@ -58,16 +58,16 @@ export default function PrescriptionsPage() {
       <Card>
         <CardTitle>Add a prescription</CardTitle>
         <form action={createPrescriptionAction} className="grid sm:grid-cols-2 gap-3">
-          <input name="name" placeholder="Medicine name" required className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm" />
-          <input name="specialty" placeholder="Prescribing specialty" className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm" />
-          <input name="dosage" type="number" min={1} placeholder="Dosage" required className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm" />
-          <input name="dosageUnit" placeholder="Unit (mg, ml...)" required className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm" />
-          <select name="frequency" className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm sm:col-span-2">
+          <input name="name" placeholder="Medicine name" required className="rounded-lg border border-border bg-transparent px-3 py-2 text-sm" />
+          <input name="specialty" placeholder="Prescribing specialty" className="rounded-lg border border-border bg-transparent px-3 py-2 text-sm" />
+          <input name="dosage" type="number" min={1} placeholder="Dosage" required className="rounded-lg border border-border bg-transparent px-3 py-2 text-sm" />
+          <input name="dosageUnit" placeholder="Unit (mg, ml...)" required className="rounded-lg border border-border bg-transparent px-3 py-2 text-sm" />
+          <select name="frequency" className="rounded-lg border border-border bg-transparent px-3 py-2 text-sm sm:col-span-2">
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
           </select>
-          <button className="sm:col-span-2 rounded-lg bg-black text-white dark:bg-white dark:text-black px-4 py-2 text-sm font-medium">
+          <button className="sm:col-span-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium">
             Add prescription
           </button>
         </form>

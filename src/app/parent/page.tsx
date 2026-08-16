@@ -44,9 +44,9 @@ export default function ParentDashboard() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Welcome back, {parent.name}</h1>
-          <p className="text-sm text-black/50 dark:text-white/50 mt-1">{parent.condition} · Age {parent.age}</p>
+          <p className="text-sm text-muted-foreground mt-1">{parent.condition} · Age {parent.age}</p>
         </div>
-        <p className="text-sm text-black/40 dark:text-white/40 shrink-0 pt-1">{formatFullDate()}</p>
+        <p className="text-sm text-muted-foreground shrink-0 pt-1">{formatFullDate()}</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -87,7 +87,7 @@ export default function ParentDashboard() {
 
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
-          <CardTitle action={<Link href="/parent/appointments" className="text-xs text-black/40 hover:underline">View all</Link>}>
+          <CardTitle action={<Link href="/parent/appointments" className="text-xs text-muted-foreground hover:underline">View all</Link>}>
             Appointments
           </CardTitle>
           <ul className="space-y-3">
@@ -97,7 +97,7 @@ export default function ParentDashboard() {
                   <Link href={`/parent/appointments/${a.id}`} className="text-sm font-medium hover:underline">
                     {a.name}
                   </Link>
-                  <p className="text-xs text-black/40 dark:text-white/40">{formatDateTime(a.appointmentTime)}</p>
+                  <p className="text-xs text-muted-foreground">{formatDateTime(a.appointmentTime)}</p>
                 </div>
                 <StatusBadge status={a.status} />
               </li>
@@ -106,7 +106,7 @@ export default function ParentDashboard() {
         </Card>
 
         <Card>
-          <CardTitle action={<Link href="/parent/prescriptions" className="text-xs text-black/40 hover:underline">View all</Link>}>
+          <CardTitle action={<Link href="/parent/prescriptions" className="text-xs text-muted-foreground hover:underline">View all</Link>}>
             Prescriptions
           </CardTitle>
           <ul className="space-y-3">
@@ -118,7 +118,7 @@ export default function ParentDashboard() {
                     <Link href={`/parent/prescriptions/${rx.id}`} className="text-sm font-medium hover:underline">
                       {rx.name}
                     </Link>
-                    <p className="text-xs text-black/40 dark:text-white/40">
+                    <p className="text-xs text-muted-foreground">
                       {rx.dosage}
                       {rx.dosageUnit} · {rx.frequency}
                     </p>
@@ -131,7 +131,7 @@ export default function ParentDashboard() {
         </Card>
 
         <Card>
-          <CardTitle action={<Link href="/parent/documents" className="text-xs text-black/40 hover:underline">View all</Link>}>
+          <CardTitle action={<Link href="/parent/documents" className="text-xs text-muted-foreground hover:underline">View all</Link>}>
             Documents
           </CardTitle>
           <ul className="space-y-3">
@@ -140,7 +140,7 @@ export default function ParentDashboard() {
                 <Link href={`/parent/documents/${d.id}`} className="text-sm font-medium truncate hover:underline">
                   {d.name}
                 </Link>
-                <span className="text-xs text-black/40 dark:text-white/40 shrink-0">{d.type}</span>
+                <span className="text-xs text-muted-foreground shrink-0">{d.type}</span>
               </li>
             ))}
           </ul>
@@ -150,12 +150,12 @@ export default function ParentDashboard() {
           <CardTitle>Wearable — Apple Watch</CardTitle>
           <div className="space-y-5">
             <div>
-              <p className="text-xs text-black/50 dark:text-white/50 mb-1">Heart rate (bpm)</p>
+              <p className="text-xs text-muted-foreground mb-1">Heart rate (bpm)</p>
               <Sparkline points={heartRate} color="#ef4444" unit=" bpm" />
               <WearableStatusLine assessment={heartRateAssessment} />
             </div>
             <div>
-              <p className="text-xs text-black/50 dark:text-white/50 mb-1">Sleep duration (hrs)</p>
+              <p className="text-xs text-muted-foreground mb-1">Sleep duration (hrs)</p>
               <Sparkline points={sleep} color="#6366f1" unit="h" decimals={1} />
               <WearableStatusLine assessment={sleepAssessment} />
             </div>

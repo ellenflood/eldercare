@@ -12,7 +12,7 @@ export default function StatusBadge({ status }: { status: string }) {
   return (
     <span
       className={`text-xs font-medium px-2 py-1 rounded-full whitespace-nowrap ${
-        STYLES[status] ?? "bg-black/5 text-black/60 dark:bg-white/10 dark:text-white/60"
+        STYLES[status] ?? "bg-secondary text-secondary-foreground"
       }`}
     >
       {status}

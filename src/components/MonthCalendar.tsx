@@ -48,10 +48,10 @@ export default function MonthCalendar({ events, today = new Date() }: { events: 
 
   return (
     <div>
-      <p className="text-center font-medium mb-3">
+      <p className="text-center font-display font-medium mb-3">
         {today.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
       </p>
-      <div className="grid grid-cols-7 gap-1 text-center text-xs text-black/40 dark:text-white/40 mb-1">
+      <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground mb-1">
         {WEEKDAYS.map((w) => (
           <div key={w}>{w}</div>
         ))}
@@ -63,15 +63,13 @@ export default function MonthCalendar({ events, today = new Date() }: { events: 
           const dayEvents = eventsByDate.get(cell.key) ?? [];
           const hasEvents = dayEvents.length > 0;
 
-          const cellClassName = `block rounded-lg p-1.5 min-h-16 border text-xs transition-colors ${
-            isToday
-              ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-              : "border-black/5 dark:border-white/10"
-          } ${hasEvents ? "cursor-pointer hover:border-black/30 dark:hover:border-white/30 hover:bg-black/[0.03] dark:hover:bg-white/[0.06]" : ""}`;
+          const cellClassName = `block rounded-md p-1.5 min-h-16 border text-xs transition-colors ${
+            isToday ? "border-primary bg-accent" : "border-border"
+          } ${hasEvents ? "cursor-pointer hover:border-ring/50 hover:bg-accent/50" : ""}`;
 
           const cellContent = (
             <>
-              <div className={`text-right ${isToday ? "font-semibold" : "text-black/60 dark:text-white/60"}`}>
+              <div className={`text-right ${isToday ? "font-semibold" : "text-muted-foreground"}`}>
                 {cell.dayNumber}
               </div>
               <div className="mt-1 space-y-0.5">
@@ -81,7 +79,7 @@ export default function MonthCalendar({ events, today = new Date() }: { events: 
                   </div>
                 ))}
                 {dayEvents.length > MAX_VISIBLE_PER_DAY && (
-                  <div className="text-[10px] text-black/40 dark:text-white/40">
+                  <div className="text-[10px] text-muted-foreground">
                     +{dayEvents.length - MAX_VISIBLE_PER_DAY} more
                   </div>
                 )}
@@ -100,7 +98,7 @@ export default function MonthCalendar({ events, today = new Date() }: { events: 
           );
         })}
       </div>
-      <div className="flex gap-4 mt-4 text-xs text-black/50 dark:text-white/50 justify-center">
+      <div className="flex gap-4 mt-4 text-xs text-muted-foreground justify-center">
         {(Object.keys(KIND_DOT) as CalendarEvent["kind"][]).map((kind) => (
           <span key={kind} className="flex items-center gap-1.5">
             <span className={`w-1.5 h-1.5 rounded-full ${KIND_DOT[kind]}`} />

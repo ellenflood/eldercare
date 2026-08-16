@@ -14,13 +14,13 @@ export default function AppointmentsPage() {
       <h1 className="text-2xl font-semibold">Appointments</h1>
 
       <Card>
-        <ul className="divide-y divide-black/5 dark:divide-white/10">
+        <ul className="divide-y divide-border">
           {appointments.map((a) => (
             <li key={a.id} className="py-3">
               <Link href={`/parent/appointments/${a.id}`} className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-medium">{a.name}</p>
-                  <p className="text-xs text-black/40 dark:text-white/40">
+                  <p className="text-xs text-muted-foreground">
                     {a.provider} · {formatDateTime(a.appointmentTime)}
                   </p>
                 </div>

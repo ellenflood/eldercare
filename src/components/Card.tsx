@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 p-5 shadow-sm ${className}`}
+      className={`rounded-lg border border-border bg-card p-5 shadow-sm ${className}`}
     >
       {children}
     </div>
@@ -14,7 +14,7 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
 export function CardTitle({ children, action }: { children: ReactNode; action?: ReactNode }) {
   return (
     <div className="flex items-center justify-between mb-3">
-      <h2 className="font-medium text-sm uppercase tracking-wide text-black/50 dark:text-white/50">{children}</h2>
+      <h2 className="font-display font-medium text-sm uppercase tracking-wide text-muted-foreground">{children}</h2>
       {action}
     </div>
   );
@@ -41,21 +41,21 @@ export function StatPill({
 }) {
   const content = (
     <>
-      <div className="text-xs text-black/50 dark:text-white/50">{label}</div>
+      <div className="text-xs text-muted-foreground">{label}</div>
       <div className={`text-base font-semibold mt-0.5 leading-snug ${TONE_TEXT[tone]} ${href ? "hover:underline" : ""}`}>
         {value}
       </div>
-      {hint && <div className="text-xs text-black/40 dark:text-white/40 mt-0.5">{hint}</div>}
+      {hint && <div className="text-xs text-muted-foreground mt-0.5">{hint}</div>}
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className="block rounded-xl bg-black/5 dark:bg-white/10 px-4 py-3 hover:bg-black/10 dark:hover:bg-white/15 transition-colors">
+      <Link href={href} className="block rounded-md bg-muted px-4 py-3 hover:bg-accent transition-colors">
         {content}
       </Link>
     );
   }
 
-  return <div className="rounded-xl bg-black/5 dark:bg-white/10 px-4 py-3">{content}</div>;
+  return <div className="rounded-md bg-muted px-4 py-3">{content}</div>;
 }

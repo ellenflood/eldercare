@@ -46,7 +46,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
 
   return (
     <div className="mx-auto max-w-2xl w-full px-4 py-8 space-y-6">
-      <Link href="/parent/documents" className="text-sm text-black/40 hover:underline">
+      <Link href="/parent/documents" className="text-sm text-muted-foreground hover:underline">
         ← Back to documents
       </Link>
 
@@ -54,12 +54,12 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold">{document.name}</h1>
-            <p className="text-sm text-black/50 dark:text-white/50 mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               Added {formatDate(document.createdAt)}
               {document.dueDate ? ` · Due ${formatDate(document.dueDate)}` : ""}
             </p>
           </div>
-          <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/5 dark:bg-white/10 shrink-0">
+          <span className="text-xs font-medium px-2 py-1 rounded-full bg-muted shrink-0">
             {document.type}
           </span>
         </div>
@@ -67,7 +67,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         {appointment && (
           <Link
             href={`/parent/appointments/${appointment.id}`}
-            className="inline-block mt-3 text-xs text-black/40 dark:text-white/40 hover:underline"
+            className="inline-block mt-3 text-xs text-muted-foreground hover:underline"
           >
             Related to: {appointment.name} · {formatDate(appointment.appointmentTime)}
           </Link>
@@ -76,7 +76,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
 
       {!content && (
         <Card>
-          <p className="text-sm text-black/40 dark:text-white/40 text-center py-6">
+          <p className="text-sm text-muted-foreground text-center py-6">
             No detailed content available for this document.
           </p>
         </Card>
@@ -86,30 +86,30 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         <Card className="space-y-5">
           <dl className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-black/40 dark:text-white/40">Provider</dt>
+              <dt className="text-muted-foreground">Provider</dt>
               <dd className="font-medium">{content.provider}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Visit date</dt>
+              <dt className="text-muted-foreground">Visit date</dt>
               <dd className="font-medium">{formatDateTime(content.visitDate)}</dd>
             </div>
           </dl>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Reason for visit
             </h2>
             <p className="text-sm">{content.reasonForVisit}</p>
           </div>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-2">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-2">
               Vitals
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {Object.entries(content.vitals).map(([label, value]) => (
-                <div key={label} className="rounded-xl bg-black/5 dark:bg-white/10 px-3 py-2">
-                  <div className="text-xs text-black/50 dark:text-white/50">{label}</div>
+                <div key={label} className="rounded-xl bg-muted px-3 py-2">
+                  <div className="text-xs text-muted-foreground">{label}</div>
                   <div className="text-sm font-semibold mt-0.5">{value}</div>
                 </div>
               ))}
@@ -117,14 +117,14 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
           </div>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Assessment
             </h2>
             <p className="text-sm">{content.assessment}</p>
           </div>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Plan
             </h2>
             <ul className="list-disc pl-5 text-sm space-y-1">
@@ -135,7 +135,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
           </div>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Follow-up
             </h2>
             <p className="text-sm">{content.followUp}</p>
@@ -147,30 +147,30 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         <Card className="space-y-5">
           <dl className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-black/40 dark:text-white/40">Provider</dt>
+              <dt className="text-muted-foreground">Provider</dt>
               <dd className="font-medium">{content.provider}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Billed to</dt>
+              <dt className="text-muted-foreground">Billed to</dt>
               <dd className="font-medium">{content.payer}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Service date</dt>
+              <dt className="text-muted-foreground">Service date</dt>
               <dd className="font-medium">{formatDate(content.serviceDate)}</dd>
             </div>
             {document.dueDate && (
               <div>
-                <dt className="text-black/40 dark:text-white/40">Due date</dt>
+                <dt className="text-muted-foreground">Due date</dt>
                 <dd className="font-medium">{formatDate(document.dueDate)}</dd>
               </div>
             )}
           </dl>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-2">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-2">
               Charges
             </h2>
-            <ul className="divide-y divide-black/5 dark:divide-white/10 text-sm">
+            <ul className="divide-y divide-border text-sm">
               {content.lineItems.map((item) => (
                 <li key={item.description} className="py-2 flex items-center justify-between gap-3">
                   <span>{item.description}</span>
@@ -178,7 +178,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
                 </li>
               ))}
               {content.insuranceAdjustment !== 0 && (
-                <li className="py-2 flex items-center justify-between gap-3 text-black/50 dark:text-white/50">
+                <li className="py-2 flex items-center justify-between gap-3 text-muted-foreground">
                   <span>Insurance adjustment</span>
                   <span className="font-medium shrink-0">{formatCurrency(content.insuranceAdjustment)}</span>
                 </li>
@@ -186,7 +186,7 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
             </ul>
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t border-black/10 dark:border-white/10">
+          <div className="flex items-center justify-between pt-2 border-t border-border">
             <span className="text-sm font-medium">Amount due</span>
             <span className="text-lg font-semibold">{formatCurrency(content.amountDue)}</span>
           </div>
@@ -197,15 +197,15 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         <Card className="space-y-4">
           <dl className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-black/40 dark:text-white/40">Panel</dt>
+              <dt className="text-muted-foreground">Panel</dt>
               <dd className="font-medium">{content.panelName}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Ordered by</dt>
+              <dt className="text-muted-foreground">Ordered by</dt>
               <dd className="font-medium">{content.orderedBy}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Collected</dt>
+              <dt className="text-muted-foreground">Collected</dt>
               <dd className="font-medium">{formatDateTime(content.collectedDate)}</dd>
             </div>
           </dl>
@@ -213,21 +213,21 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-xs text-black/40 dark:text-white/40 border-b border-black/10 dark:border-white/10">
+                <tr className="text-left text-xs text-muted-foreground border-b border-border">
                   <th className="py-2 font-medium">Test</th>
                   <th className="py-2 font-medium">Result</th>
                   <th className="py-2 font-medium">Reference range</th>
                   <th className="py-2 font-medium text-right">Flag</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-black/5 dark:divide-white/10">
+              <tbody className="divide-y divide-border">
                 {content.values.map((v) => (
                   <tr key={v.label}>
                     <td className="py-2 pr-2">{v.label}</td>
                     <td className="py-2 pr-2 font-medium whitespace-nowrap">
                       {v.value} {v.unit}
                     </td>
-                    <td className="py-2 pr-2 text-black/50 dark:text-white/50 whitespace-nowrap">{v.referenceRange}</td>
+                    <td className="py-2 pr-2 text-muted-foreground whitespace-nowrap">{v.referenceRange}</td>
                     <td className="py-2 text-right">
                       <span className={`text-xs font-medium px-2 py-1 rounded-full whitespace-nowrap ${FLAG_STYLES[v.flag]}`}>
                         {v.flag}
@@ -245,28 +245,28 @@ export default async function DocumentDetailPage({ params }: PageProps<"/parent/
         <Card className="space-y-4">
           <dl className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-black/40 dark:text-white/40">Study</dt>
+              <dt className="text-muted-foreground">Study</dt>
               <dd className="font-medium">{content.studyName}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Ordered by</dt>
+              <dt className="text-muted-foreground">Ordered by</dt>
               <dd className="font-medium">{content.orderedBy}</dd>
             </div>
             <div>
-              <dt className="text-black/40 dark:text-white/40">Performed</dt>
+              <dt className="text-muted-foreground">Performed</dt>
               <dd className="font-medium">{formatDateTime(content.performedDate)}</dd>
             </div>
           </dl>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Findings
             </h2>
             <p className="text-sm">{content.findings}</p>
           </div>
 
           <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-black/50 dark:text-white/50 mb-1">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
               Impression
             </h2>
             <p className="text-sm">{content.impression}</p>

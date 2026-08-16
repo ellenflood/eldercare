@@ -76,7 +76,7 @@ export default function CalendarPage() {
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
       <h1 className="text-2xl font-semibold">Calendar</h1>
-      <p className="text-sm text-black/50 dark:text-white/50">
+      <p className="text-sm text-muted-foreground">
         Appointments, bill due dates, and prescription refills in one view. Click a date with something on it
         to jump to the details below.
       </p>
@@ -86,8 +86,8 @@ export default function CalendarPage() {
       </Card>
 
       <Card>
-        <p className="text-xs uppercase tracking-wide text-black/40 dark:text-white/40 mb-2">Agenda</p>
-        <div className="divide-y divide-black/5 dark:divide-white/10">
+        <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Agenda</p>
+        <div className="divide-y divide-border">
           {[...eventsByDay.entries()].map(([dayKey, dayEvents]) => (
             <div key={dayKey} id={`day-${dayKey}`} className="py-3 scroll-mt-24">
               <p className="text-sm font-semibold mb-2">{formatDate(dayEvents[0].date)}</p>
@@ -98,7 +98,7 @@ export default function CalendarPage() {
                       <Link href={e.href} className="text-sm font-medium hover:underline">
                         {e.title}
                       </Link>
-                      <p className="text-xs text-black/40 dark:text-white/40">
+                      <p className="text-xs text-muted-foreground">
                         {e.detail} · {formatTime(e.date)}
                       </p>
                     </div>

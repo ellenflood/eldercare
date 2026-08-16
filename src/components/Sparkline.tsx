@@ -27,7 +27,7 @@ export default function Sparkline({ points, color, unit = "", decimals = 0 }: Sp
   const yTicks = [min, (min + max) / 2, max];
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className="w-full text-black/50 dark:text-white/50">
+    <svg viewBox={`0 0 ${width} ${height}`} className="w-full text-muted-foreground">
       {yTicks.map((t) => {
         const y = yFor(t);
         return (

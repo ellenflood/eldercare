@@ -12,14 +12,14 @@ function severityStyle(severity: number): string {
 export default function AlertsFeed({ alerts }: { alerts: { alert: Alert; href: string | null }[] }) {
   if (alerts.length === 0) {
     return (
-      <p className="text-sm text-black/50 dark:text-white/50 py-6 text-center">
+      <p className="text-sm text-muted-foreground py-6 text-center">
         No active alerts. Everything looks on track.
       </p>
     );
   }
 
   return (
-    <ul className="divide-y divide-black/5 dark:divide-white/10">
+    <ul className="divide-y divide-border">
       {alerts.map(({ alert, href }) => (
         <li key={alert.id} className="py-3 flex items-start justify-between gap-3">
           <div>
@@ -30,7 +30,7 @@ export default function AlertsFeed({ alerts }: { alerts: { alert: Alert; href: s
             ) : (
               <p className="text-sm font-medium">{alert.name}</p>
             )}
-            <p className="text-xs text-black/40 dark:text-white/40 mt-0.5">
+            <p className="text-xs text-muted-foreground mt-0.5">
               {alert.type} · {formatDateTime(alert.createdAt)}
             </p>
           </div>

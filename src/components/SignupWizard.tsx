@@ -6,7 +6,7 @@ import { completeSignupAction } from "@/lib/actions";
 const WEARABLES = ["Apple Watch", "Garmin", "Oura", "Fitbit", "Glucose monitor", "None"];
 
 const inputClass =
-  "rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm w-full";
+  "rounded-md border border-input bg-transparent px-3 py-2 text-sm w-full";
 
 export default function SignupWizard() {
   const [step, setStep] = useState(0);
@@ -30,10 +30,10 @@ export default function SignupWizard() {
             key={label}
             className={`flex items-center justify-center text-center px-2.5 py-1 rounded-full ${
               i === step
-                ? "bg-black text-white dark:bg-white dark:text-black"
+                ? "bg-primary text-primary-foreground"
                 : i < step
-                  ? "bg-black/10 dark:bg-white/20 text-black/60 dark:text-white/60"
-                  : "bg-black/5 dark:bg-white/5 text-black/30 dark:text-white/30"
+                  ? "bg-secondary text-secondary-foreground"
+                  : "bg-muted text-muted-foreground"
             }`}
           >
             {label}
@@ -58,9 +58,9 @@ export default function SignupWizard() {
         <div className="space-y-3">
           <label className="block text-sm">
             Pre-existing condition
-            <input className={`${inputClass} mt-1`} value={condition} onChange={(e) => setCondition(e.target.value)} placeholder="e.g. Type 2 Diabetes" />
+            <input className={`${inputClass} mt-1`} value={condition} onChange={(e) => setCondition(e.target.value)} placeholder="e.g. Heart Disease" />
           </label>
-          <p className="text-xs text-black/40 dark:text-white/40 pt-2">Add a current prescription (optional)</p>
+          <p className="text-xs text-muted-foreground pt-2">Add a current prescription (optional)</p>
           <div className="grid grid-cols-2 gap-3">
             <input className={inputClass} value={rxName} onChange={(e) => setRxName(e.target.value)} placeholder="Medicine name" />
             <select className={inputClass} value={rxFrequency} onChange={(e) => setRxFrequency(e.target.value)}>
@@ -92,7 +92,7 @@ export default function SignupWizard() {
             Invite your child (email or phone)
             <input className={`${inputClass} mt-1`} value={inviteContact} onChange={(e) => setInviteContact(e.target.value)} placeholder="child@example.com" />
           </label>
-          <p className="text-xs text-black/40 dark:text-white/40">
+          <p className="text-xs text-muted-foreground">
             Demo mode: no invite email is sent — this just documents the intended flow.
           </p>
         </div>
@@ -108,22 +108,22 @@ export default function SignupWizard() {
           <input type="hidden" name="rxUnit" value={rxUnit} />
           <input type="hidden" name="rxFrequency" value={rxFrequency} />
 
-          <dl className="text-sm grid grid-cols-2 gap-2 rounded-xl bg-black/5 dark:bg-white/5 p-4">
-            <dt className="text-black/40 dark:text-white/40">Name</dt>
+          <dl className="text-sm grid grid-cols-2 gap-2 rounded-md bg-muted p-4">
+            <dt className="text-muted-foreground">Name</dt>
             <dd>{name || "—"}</dd>
-            <dt className="text-black/40 dark:text-white/40">Age</dt>
+            <dt className="text-muted-foreground">Age</dt>
             <dd>{age || "—"}</dd>
-            <dt className="text-black/40 dark:text-white/40">Condition</dt>
+            <dt className="text-muted-foreground">Condition</dt>
             <dd>{condition || "—"}</dd>
-            <dt className="text-black/40 dark:text-white/40">Prescription</dt>
+            <dt className="text-muted-foreground">Prescription</dt>
             <dd>{rxName ? `${rxName} · ${rxDosage}${rxUnit} · ${rxFrequency}` : "—"}</dd>
-            <dt className="text-black/40 dark:text-white/40">Wearable</dt>
+            <dt className="text-muted-foreground">Wearable</dt>
             <dd>{wearable}</dd>
-            <dt className="text-black/40 dark:text-white/40">Invite sent to</dt>
+            <dt className="text-muted-foreground">Invite sent to</dt>
             <dd>{inviteContact || "—"}</dd>
           </dl>
 
-          <button className="w-full rounded-lg bg-black text-white dark:bg-white dark:text-black px-4 py-2.5 text-sm font-medium">
+          <button className="w-full rounded-md bg-primary text-primary-foreground px-4 py-2.5 text-sm font-medium">
             Complete signup
           </button>
         </form>
@@ -134,7 +134,7 @@ export default function SignupWizard() {
           <button
             type="button"
             onClick={() => setStep((s) => Math.max(0, s - 1))}
-            className="text-sm px-4 py-2 rounded-lg border border-black/15 dark:border-white/20 disabled:opacity-30"
+            className="text-sm px-4 py-2 rounded-md border border-border disabled:opacity-30"
             disabled={step === 0}
           >
             Back
@@ -142,7 +142,7 @@ export default function SignupWizard() {
           <button
             type="button"
             onClick={() => setStep((s) => Math.min(4, s + 1))}
-            className="text-sm px-4 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+            className="text-sm px-4 py-2 rounded-md bg-primary text-primary-foreground"
           >
             Continue
           </button>
