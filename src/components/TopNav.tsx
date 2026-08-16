@@ -15,6 +15,7 @@ const PARENT_LINKS = [
 
 const CHILD_LINKS = [
   { href: "/child", label: "Dashboard" },
+  { href: "/child/calendar", label: "Calendar" },
   { href: "/child/account", label: "Account" },
 ];
 

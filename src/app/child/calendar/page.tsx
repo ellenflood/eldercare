@@ -3,7 +3,7 @@ import { getCalendarEvents } from "@/lib/calendar";
 
 export const dynamic = "force-dynamic";
 
-export default function CalendarPage() {
+export default function ChildCalendarPage() {
   const events = getCalendarEvents();
 
   return (
