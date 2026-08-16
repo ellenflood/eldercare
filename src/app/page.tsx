@@ -16,9 +16,9 @@ export default function Home() {
           alt=""
           fill
           priority
-          className="scale-110 object-cover object-[70%_30%] blur-2xl opacity-40 dark:opacity-20"
+          className="scale-110 object-cover object-[70%_30%] blur-md opacity-80 dark:opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/60 to-background" />
       </div>
 
       <main className="w-full max-w-xl flex flex-col items-center text-center gap-6">
