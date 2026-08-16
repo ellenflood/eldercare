@@ -1,28 +1,24 @@
 import Image from "next/image";
 import { Card, CardTitle } from "@/components/Card";
-import Sparkline from "@/components/Sparkline";
-import WearableStatusLine from "@/components/WearableStatusLine";
 import { connectDeviceAction, disconnectDeviceAction } from "@/lib/actions";
 import { formatDate } from "@/lib/format";
-import { getDeviceLogs, getDevices } from "@/lib/store";
-import { assessHeartRate, assessSleep } from "@/lib/wearable";
+import { getDevices } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
 const WEARABLE_OPTIONS = [
-  { brand: "Apple", label: "Apple Watch", image: "/images/devices/apple-watch.jpg" },
+  { brand: "Apple", label: "Apple Watch" },
   { brand: "Garmin", label: "Garmin" },
   { brand: "Oura", label: "Oura" },
   { brand: "Fitbit", label: "Fitbit" },
 ];
 
 const DEVICE_IMAGE: Record<string, string> = {
-  Apple: "/images/devices/apple-watch.jpg",
+  Apple: "/images/devices/apple-watch.png",
 };
 
 export default function WearablesPage() {
   const devices = getDevices();
-  const deviceLogs = getDeviceLogs();
   const connectedBrands = new Set(devices.map((d) => d.brand));
 
   return (
@@ -31,18 +27,11 @@ export default function WearablesPage() {
 
       <div className="space-y-4">
         {devices.map((device) => {
-          const logs = deviceLogs.filter((l) => l.deviceId === device.id);
-          const heartRate = logs
-            .filter((l) => l.type === "HeartRate")
-            .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
-          const sleep = logs
-            .filter((l) => l.type === "SleepDuration")
-            .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
           const image = DEVICE_IMAGE[device.brand];
 
           return (
             <Card key={device.id}>
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   {image && (
                     <Image
@@ -50,7 +39,7 @@ export default function WearablesPage() {
                       alt={device.model}
                       width={64}
                       height={64}
-                      className="rounded-lg object-cover border border-border shrink-0"
+                      className="rounded-lg object-contain border border-border bg-white shrink-0"
                     />
                   )}
                   <div>
@@ -67,27 +56,6 @@ export default function WearablesPage() {
                   </button>
                 </form>
               </div>
-
-              {heartRate.length > 0 || sleep.length > 0 ? (
-                <div className="space-y-5 mt-5">
-                  {heartRate.length > 0 && (
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Heart rate (bpm)</p>
-                      <Sparkline points={heartRate} color="#ef4444" unit=" bpm" />
-                      <WearableStatusLine assessment={assessHeartRate(heartRate)} />
-                    </div>
-                  )}
-                  {sleep.length > 0 && (
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Sleep duration (hrs)</p>
-                      <Sparkline points={sleep} color="#6366f1" unit="h" decimals={1} />
-                      <WearableStatusLine assessment={assessSleep(sleep)} />
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground mt-4">No readings synced yet.</p>
-              )}
             </Card>
           );
         })}
