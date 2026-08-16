@@ -1,0 +1,15 @@
+[
+  {
+    "id": "child-1",
+    "parentId": "parent-1",
+    "name": "Daniel Chen",
+    "age": 42,
+    "gender": "Male",
+    "email": "daniel.chen@example.com",
+    "phone": "+1-617-555-0198",
+    "address": "88 Beacon St, Boston, MA",
+    "role": "Admin",
+    "createdAt": "2026-05-01T09:00:00.000Z",
+    "updatedAt": "2026-05-01T09:00:00.000Z"
+  }
+]

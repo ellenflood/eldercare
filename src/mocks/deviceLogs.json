@@ -1,0 +1,16 @@
+[
+  { "id": "log-hr-0810", "deviceId": "device-1", "type": "HeartRate", "value": "74", "createdAt": "2026-08-10T08:00:00.000Z" },
+  { "id": "log-sleep-0810", "deviceId": "device-1", "type": "SleepDuration", "value": "6.8", "createdAt": "2026-08-10T08:00:00.000Z" },
+  { "id": "log-hr-0811", "deviceId": "device-1", "type": "HeartRate", "value": "71", "createdAt": "2026-08-11T08:00:00.000Z" },
+  { "id": "log-sleep-0811", "deviceId": "device-1", "type": "SleepDuration", "value": "7.1", "createdAt": "2026-08-11T08:00:00.000Z" },
+  { "id": "log-hr-0812", "deviceId": "device-1", "type": "HeartRate", "value": "78", "createdAt": "2026-08-12T08:00:00.000Z" },
+  { "id": "log-sleep-0812", "deviceId": "device-1", "type": "SleepDuration", "value": "6.2", "createdAt": "2026-08-12T08:00:00.000Z" },
+  { "id": "log-hr-0813", "deviceId": "device-1", "type": "HeartRate", "value": "69", "createdAt": "2026-08-13T08:00:00.000Z" },
+  { "id": "log-sleep-0813", "deviceId": "device-1", "type": "SleepDuration", "value": "7.4", "createdAt": "2026-08-13T08:00:00.000Z" },
+  { "id": "log-hr-0814", "deviceId": "device-1", "type": "HeartRate", "value": "73", "createdAt": "2026-08-14T08:00:00.000Z" },
+  { "id": "log-sleep-0814", "deviceId": "device-1", "type": "SleepDuration", "value": "6.9", "createdAt": "2026-08-14T08:00:00.000Z" },
+  { "id": "log-hr-0815", "deviceId": "device-1", "type": "HeartRate", "value": "82", "createdAt": "2026-08-15T08:00:00.000Z" },
+  { "id": "log-sleep-0815", "deviceId": "device-1", "type": "SleepDuration", "value": "5.4", "createdAt": "2026-08-15T08:00:00.000Z" },
+  { "id": "log-hr-0816", "deviceId": "device-1", "type": "HeartRate", "value": "76", "createdAt": "2026-08-16T08:00:00.000Z" },
+  { "id": "log-sleep-0816", "deviceId": "device-1", "type": "SleepDuration", "value": "6.7", "createdAt": "2026-08-16T08:00:00.000Z" }
+]

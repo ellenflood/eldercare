@@ -1,20 +1,46 @@
+import Link from "next/link";
+import { getChild, getParent } from "@/lib/store";
+
+export const dynamic = "force-dynamic";
+
 export default function Home() {
+  const parent = getParent();
+  const child = getChild();
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 px-6 font-sans dark:bg-black">
-      <main className="flex w-full max-w-xl flex-col items-start gap-6">
-        <span className="rounded-full border border-black/10 px-3 py-1 text-xs font-medium tracking-wide text-zinc-600 uppercase dark:border-white/15 dark:text-zinc-400">
-          Work in progress
+    <div className="flex flex-1 flex-col items-center justify-center px-6 py-16">
+      <main className="w-full max-w-xl flex flex-col items-center text-center gap-6">
+        <span className="rounded-full border border-black/10 dark:border-white/15 px-3 py-1 text-xs font-medium tracking-wide text-zinc-600 dark:text-zinc-400 uppercase">
+          Demo v1
         </span>
-        <h1 className="text-4xl font-semibold tracking-tight text-black dark:text-zinc-50">
-          Eldercare
-        </h1>
-        <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-          The app is set up and running. Start building by editing{" "}
-          <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-            src/app/page.tsx
-          </code>
-          .
+        <h1 className="text-4xl font-semibold tracking-tight">Eldercare Concierge</h1>
+        <p className="text-zinc-600 dark:text-zinc-400 max-w-md">
+          Remote care management for adult children keeping an eye on their parents —
+          appointments, prescriptions, wearable alerts, and documents in one place.
         </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 w-full mt-4">
+          <Link
+            href="/parent"
+            className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 p-6 text-left hover:border-black/30 dark:hover:border-white/30 transition-colors"
+          >
+            <p className="text-xs uppercase tracking-wide text-zinc-500">View as</p>
+            <p className="text-lg font-semibold mt-1">Parent</p>
+            <p className="text-sm text-zinc-500 mt-1">{parent.name}, {parent.age}</p>
+          </Link>
+          <Link
+            href="/child"
+            className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 p-6 text-left hover:border-black/30 dark:hover:border-white/30 transition-colors"
+          >
+            <p className="text-xs uppercase tracking-wide text-zinc-500">View as</p>
+            <p className="text-lg font-semibold mt-1">Child</p>
+            <p className="text-sm text-zinc-500 mt-1">{child.name}, {child.age}</p>
+          </Link>
+        </div>
+
+        <Link href="/signup" className="text-sm text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline mt-2">
+          Or start the signup flow →
+        </Link>
       </main>
     </div>
   );

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "rx-daily-1",
+    "parentId": "parent-1",
+    "specialty": "Endocrinology",
+    "name": "Metformin",
+    "dosageUnit": "mg",
+    "dosage": 500,
+    "frequency": "daily",
+    "startDate": "2026-05-15T00:00:00.000Z",
+    "endDate": null,
+    "createdAt": "2026-05-15T09:00:00.000Z",
+    "updatedAt": "2026-05-15T09:00:00.000Z"
+  },
+  {
+    "id": "rx-weekly-1",
+    "parentId": "parent-1",
+    "specialty": "Rheumatology",
+    "name": "Alendronate",
+    "dosageUnit": "mg",
+    "dosage": 70,
+    "frequency": "weekly",
+    "startDate": "2026-06-01T00:00:00.000Z",
+    "endDate": null,
+    "createdAt": "2026-06-01T09:00:00.000Z",
+    "updatedAt": "2026-06-01T09:00:00.000Z"
+  }
+]

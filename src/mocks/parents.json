@@ -1,0 +1,14 @@
+[
+  {
+    "id": "parent-1",
+    "name": "Margaret Chen",
+    "age": 74,
+    "gender": "Female",
+    "email": "margaret.chen@example.com",
+    "phone": "+1-617-555-0142",
+    "address": "12 Willow St, Newton, MA",
+    "condition": "Type 2 Diabetes",
+    "createdAt": "2026-05-01T09:00:00.000Z",
+    "updatedAt": "2026-05-01T09:00:00.000Z"
+  }
+]

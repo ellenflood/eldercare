@@ -1,0 +1,26 @@
+[
+  {
+    "id": "appt-past-1",
+    "parentId": "parent-1",
+    "status": "Attended",
+    "specialty": "Endocrinology",
+    "name": "Endocrinology Follow-up",
+    "provider": "Dr. Alice Nguyen",
+    "location": "Boston Medical Center, Suite 4B",
+    "appointmentTime": "2026-08-06T14:00:00.000Z",
+    "createdAt": "2026-07-20T09:00:00.000Z",
+    "updatedAt": "2026-08-06T15:00:00.000Z"
+  },
+  {
+    "id": "appt-upcoming-1",
+    "parentId": "parent-1",
+    "status": "Pending",
+    "specialty": "Cardiology",
+    "name": "Cardiology Checkup",
+    "provider": "Dr. Raj Patel",
+    "location": "Brigham Heart & Vascular Center",
+    "appointmentTime": "2026-08-20T18:30:00.000Z",
+    "createdAt": "2026-07-25T09:00:00.000Z",
+    "updatedAt": "2026-07-25T09:00:00.000Z"
+  }
+]

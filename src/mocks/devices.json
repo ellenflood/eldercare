@@ -1,0 +1,11 @@
+[
+  {
+    "id": "device-1",
+    "parentId": "parent-1",
+    "type": "Wearable",
+    "brand": "Apple",
+    "model": "Apple Watch Series 9",
+    "deviceId": "AW-SERIES9-4F21",
+    "createdAt": "2026-06-01T09:00:00.000Z"
+  }
+]
