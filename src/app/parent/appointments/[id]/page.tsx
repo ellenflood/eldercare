@@ -4,7 +4,7 @@ import { Card } from "@/components/Card";
 import StatusBadge from "@/components/StatusBadge";
 import { updateAppointmentStatusAction } from "@/lib/actions";
 import { formatDate, formatTime } from "@/lib/format";
-import { getAppointment } from "@/lib/store";
+import { getAppointment, getDocumentsForAppointment } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +21,7 @@ export default async function AppointmentDetailPage({ params }: PageProps<"/pare
   if (!appointment) notFound();
 
   const actions = NEXT_STATUS[appointment.status] ?? [];
+  const documents = getDocumentsForAppointment(appointment.id);
 
   return (
     <div className="mx-auto max-w-2xl w-full px-4 py-8 space-y-6">
@@ -68,6 +69,36 @@ export default async function AppointmentDetailPage({ params }: PageProps<"/pare
               </form>
             ))}
           </div>
+        )}
+      </Card>
+
+      <Card>
+        <h2 className="text-sm font-medium">Documents</h2>
+        <p className="text-xs text-black/40 dark:text-white/40 mt-0.5">
+          Bills, visit summaries, and results tied to this appointment.
+        </p>
+
+        {documents.length === 0 ? (
+          <p className="text-sm text-black/40 dark:text-white/40 py-6 text-center">
+            No documents linked to this appointment yet.
+          </p>
+        ) : (
+          <ul className="divide-y divide-black/5 dark:divide-white/10 mt-3">
+            {documents.map((d) => (
+              <li key={d.id} className="py-3 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-sm font-medium">{d.name}</p>
+                  <p className="text-xs text-black/40 dark:text-white/40">
+                    Added {formatDate(d.createdAt)}
+                    {d.dueDate ? ` · Due ${formatDate(d.dueDate)}` : ""}
+                  </p>
+                </div>
+                <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/5 dark:bg-white/10 shrink-0">
+                  {d.type}
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
       </Card>
     </div>

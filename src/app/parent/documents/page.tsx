@@ -42,6 +42,7 @@ export default function DocumentsPage() {
           <select name="type" className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm">
             <option value="Bill">Bill</option>
             <option value="Results">Results</option>
+            <option value="Visit Summary">Visit Summary</option>
             <option value="Others">Others</option>
           </select>
           <input name="dueDate" type="date" placeholder="Due date (bills only)" className="rounded-lg border border-black/15 dark:border-white/20 bg-transparent px-3 py-2 text-sm" />

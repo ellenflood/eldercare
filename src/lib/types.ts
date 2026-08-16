@@ -47,7 +47,7 @@ export interface DeviceLog {
   createdAt: string;
 }
 
-export type DocumentType = "Bill" | "Results" | "Others";
+export type DocumentType = "Visit Summary" | "Bill" | "Results" | "Others";
 
 export interface AppDocument {
   id: string;
@@ -56,6 +56,7 @@ export interface AppDocument {
   type: DocumentType;
   name: string;
   dueDate: string | null;
+  appointmentId: string | null;
   createdAt: string;
   updatedAt: string;
 }

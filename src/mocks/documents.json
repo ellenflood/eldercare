@@ -6,6 +6,7 @@
     "type": "Results",
     "name": "Q3 Blood Panel Results.pdf",
     "dueDate": null,
+    "appointmentId": "appt-past-1",
     "createdAt": "2026-08-05T12:00:00.000Z",
     "updatedAt": "2026-08-05T12:00:00.000Z"
   },
@@ -16,7 +17,85 @@
     "type": "Bill",
     "name": "Electric Bill - August 2026.pdf",
     "dueDate": "2026-08-25T00:00:00.000Z",
+    "appointmentId": null,
     "createdAt": "2026-08-10T09:00:00.000Z",
     "updatedAt": "2026-08-10T09:00:00.000Z"
+  },
+  {
+    "id": "doc-endo-visit-summary-1",
+    "parentId": "parent-1",
+    "link": "/mock-files/endo-visit-summary-aug6.pdf",
+    "type": "Visit Summary",
+    "name": "Endocrinology Follow-up - Visit Summary.pdf",
+    "dueDate": null,
+    "appointmentId": "appt-past-1",
+    "createdAt": "2026-08-06T16:30:00.000Z",
+    "updatedAt": "2026-08-06T16:30:00.000Z"
+  },
+  {
+    "id": "doc-endo-bill-1",
+    "parentId": "parent-1",
+    "link": "/mock-files/endo-visit-bill-aug6.pdf",
+    "type": "Bill",
+    "name": "Boston Medical Center - Endocrinology Visit Bill.pdf",
+    "dueDate": "2026-09-05T00:00:00.000Z",
+    "appointmentId": "appt-past-1",
+    "createdAt": "2026-08-12T10:00:00.000Z",
+    "updatedAt": "2026-08-12T10:00:00.000Z"
+  },
+  {
+    "id": "doc-endo-results-2",
+    "parentId": "parent-1",
+    "link": "/mock-files/comprehensive-metabolic-panel.pdf",
+    "type": "Results",
+    "name": "Comprehensive Metabolic Panel Results.pdf",
+    "dueDate": null,
+    "appointmentId": "appt-past-1",
+    "createdAt": "2026-08-05T09:00:00.000Z",
+    "updatedAt": "2026-08-05T09:00:00.000Z"
+  },
+  {
+    "id": "doc-cardio-visit-summary-1",
+    "parentId": "parent-1",
+    "link": "/mock-files/cardio-visit-summary-jul9.pdf",
+    "type": "Visit Summary",
+    "name": "Cardiology Follow-up - Visit Summary.pdf",
+    "dueDate": null,
+    "appointmentId": "appt-upcoming-1",
+    "createdAt": "2026-07-09T15:00:00.000Z",
+    "updatedAt": "2026-07-09T15:00:00.000Z"
+  },
+  {
+    "id": "doc-cardio-bill-1",
+    "parentId": "parent-1",
+    "link": "/mock-files/cardio-visit-bill-jul9.pdf",
+    "type": "Bill",
+    "name": "Brigham Heart & Vascular Center - Visit Bill.pdf",
+    "dueDate": "2026-08-09T00:00:00.000Z",
+    "appointmentId": "appt-upcoming-1",
+    "createdAt": "2026-07-15T09:00:00.000Z",
+    "updatedAt": "2026-07-15T09:00:00.000Z"
+  },
+  {
+    "id": "doc-cardio-results-1",
+    "parentId": "parent-1",
+    "link": "/mock-files/ekg-results-jul9.pdf",
+    "type": "Results",
+    "name": "EKG Results.pdf",
+    "dueDate": null,
+    "appointmentId": "appt-upcoming-1",
+    "createdAt": "2026-07-09T15:30:00.000Z",
+    "updatedAt": "2026-07-09T15:30:00.000Z"
+  },
+  {
+    "id": "doc-cardio-results-2",
+    "parentId": "parent-1",
+    "link": "/mock-files/echocardiogram-results-aug13.pdf",
+    "type": "Results",
+    "name": "Echocardiogram Results.pdf",
+    "dueDate": null,
+    "appointmentId": "appt-upcoming-1",
+    "createdAt": "2026-08-13T10:00:00.000Z",
+    "updatedAt": "2026-08-13T10:00:00.000Z"
   }
 ]

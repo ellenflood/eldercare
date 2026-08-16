@@ -64,6 +64,7 @@ export async function uploadDocumentAction(formData: FormData) {
     type,
     link: "#",
     dueDate: type === "Bill" && dueDate ? new Date(dueDate).toISOString() : null,
+    appointmentId: null,
   });
 
   revalidatePath("/parent/documents");

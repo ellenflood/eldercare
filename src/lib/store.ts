@@ -70,6 +70,12 @@ export function getDocuments(): AppDocument[] {
   return [...getStore().documents].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
+export function getDocumentsForAppointment(appointmentId: string): AppDocument[] {
+  return getStore()
+    .documents.filter((d) => d.appointmentId === appointmentId)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
 export function getAppointments(): Appointment[] {
   return [...getStore().appointments].sort((a, b) => a.appointmentTime.localeCompare(b.appointmentTime));
 }
