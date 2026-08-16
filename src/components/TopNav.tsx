@@ -26,7 +26,7 @@ export default function TopNav() {
     <header className="border-b border-border bg-background/70 backdrop-blur sticky top-0 z-10">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
         <Link href="/" className="font-display font-semibold tracking-tight text-lg shrink-0">
-          Eldercare
+          WithYou
         </Link>
 
         {links.length > 0 && (

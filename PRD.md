@@ -1,8 +1,8 @@
-# Eldercare Concierge Platform — Build Spec (Demo v1)
+# WithYou Platform — Build Spec (Demo v1)
 
 ## Goal Instruction
 
-Build and deploy a demo-ready version of the eldercare concierge platform described in this
+Build and deploy a demo-ready version of the WithYou platform described in this
 document, inside this repository (`ellenflood/eldercare`), on top of the existing Next.js
 (App Router) + TypeScript + Tailwind scaffold in `src/app`. Deploy via the existing
 Vercel↔GitHub integration — pushing to `main` triggers deployment automatically; do not

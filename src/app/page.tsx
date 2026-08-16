@@ -13,11 +13,8 @@ export default function Home() {
         <span className="rounded-full border border-border px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Demo v1
         </span>
-        <h1 className="text-4xl font-semibold tracking-tight">Eldercare Concierge</h1>
-        <p className="text-muted-foreground max-w-md">
-          Remote care management for adult children keeping an eye on their parents —
-          appointments, prescriptions, wearable alerts, and documents in one place.
-        </p>
+        <h1 className="text-4xl font-semibold tracking-tight">WithYou</h1>
+        <p className="text-muted-foreground max-w-md">Every step of the way...</p>
 
         <div className="grid sm:grid-cols-2 gap-4 w-full mt-4">
           <Link
