@@ -15,6 +15,9 @@ const WEARABLE_OPTIONS = [
 
 const DEVICE_IMAGE: Record<string, string> = {
   Apple: "/images/devices/apple-watch.png",
+  Garmin: "/images/devices/garmin.png",
+  Oura: "/images/devices/oura.png",
+  Fitbit: "/images/devices/fitbit.png",
 };
 
 export default function WearablesPage() {
