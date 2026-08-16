@@ -76,6 +76,10 @@ export function getDocumentsForAppointment(appointmentId: string): AppDocument[]
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
+export function getDocument(id: string): AppDocument | undefined {
+  return getStore().documents.find((d) => d.id === id);
+}
+
 export function getAppointments(): Appointment[] {
   return [...getStore().appointments].sort((a, b) => a.appointmentTime.localeCompare(b.appointmentTime));
 }

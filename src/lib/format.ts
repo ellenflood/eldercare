@@ -31,6 +31,14 @@ export function formatTime(iso: string): string {
   });
 }
 
+export function formatCurrency(amount: number): string {
+  const formatted = Math.abs(amount).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  return amount < 0 ? `-${formatted}` : formatted;
+}
+
 export function relativeDay(iso: string, now: Date = new Date()): string {
   const target = new Date(iso);
   const diffDays = Math.round((target.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / 86_400_000);

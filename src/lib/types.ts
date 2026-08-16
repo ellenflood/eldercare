@@ -49,6 +49,57 @@ export interface DeviceLog {
 
 export type DocumentType = "Visit Summary" | "Bill" | "Results" | "Others";
 
+export interface VisitSummaryContent {
+  provider: string;
+  visitDate: string;
+  reasonForVisit: string;
+  vitals: Record<string, string>;
+  assessment: string;
+  plan: string[];
+  followUp: string;
+}
+
+export interface BillLineItem {
+  description: string;
+  amount: number;
+}
+
+export interface BillContent {
+  provider: string;
+  payer: string;
+  serviceDate: string;
+  lineItems: BillLineItem[];
+  insuranceAdjustment: number;
+  amountDue: number;
+}
+
+export type ResultFlag = "Normal" | "High" | "Low";
+
+export interface LabResultValue {
+  label: string;
+  value: string;
+  unit: string;
+  referenceRange: string;
+  flag: ResultFlag;
+}
+
+export interface LabResultsContent {
+  orderedBy: string;
+  collectedDate: string;
+  panelName: string;
+  values: LabResultValue[];
+}
+
+export interface ImagingResultsContent {
+  orderedBy: string;
+  performedDate: string;
+  studyName: string;
+  findings: string;
+  impression: string;
+}
+
+export type DocumentContent = VisitSummaryContent | BillContent | LabResultsContent | ImagingResultsContent;
+
 export interface AppDocument {
   id: string;
   parentId: string;
@@ -57,6 +108,7 @@ export interface AppDocument {
   name: string;
   dueDate: string | null;
   appointmentId: string | null;
+  content: DocumentContent | null;
   createdAt: string;
   updatedAt: string;
 }

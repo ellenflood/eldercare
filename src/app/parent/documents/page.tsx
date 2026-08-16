@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardTitle } from "@/components/Card";
 import { uploadDocumentAction } from "@/lib/actions";
 import { formatDate } from "@/lib/format";
@@ -15,17 +16,22 @@ export default function DocumentsPage() {
       <Card>
         <ul className="divide-y divide-black/5 dark:divide-white/10">
           {documents.map((d) => (
-            <li key={d.id} className="py-3 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-sm font-medium">{d.name}</p>
-                <p className="text-xs text-black/40 dark:text-white/40">
-                  Added {formatDate(d.createdAt)}
-                  {d.dueDate ? ` · Due ${formatDate(d.dueDate)}` : ""}
-                </p>
-              </div>
-              <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/5 dark:bg-white/10 shrink-0">
-                {d.type}
-              </span>
+            <li key={d.id}>
+              <Link
+                href={`/parent/documents/${d.id}`}
+                className="py-3 flex items-center justify-between gap-3 hover:bg-black/[.02] dark:hover:bg-white/[.03] -mx-2 px-2 rounded-lg"
+              >
+                <div>
+                  <p className="text-sm font-medium">{d.name}</p>
+                  <p className="text-xs text-black/40 dark:text-white/40">
+                    Added {formatDate(d.createdAt)}
+                    {d.dueDate ? ` · Due ${formatDate(d.dueDate)}` : ""}
+                  </p>
+                </div>
+                <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/5 dark:bg-white/10 shrink-0">
+                  {d.type}
+                </span>
+              </Link>
             </li>
           ))}
           {documents.length === 0 && <p className="text-sm text-black/40 py-6 text-center">No documents yet.</p>}

@@ -7,6 +7,18 @@
     "name": "Q3 Blood Panel Results.pdf",
     "dueDate": null,
     "appointmentId": "appt-past-1",
+    "content": {
+      "orderedBy": "Dr. Alice Nguyen",
+      "collectedDate": "2026-08-05T08:15:00.000Z",
+      "panelName": "Hemoglobin A1C & Lipid Panel",
+      "values": [
+        { "label": "Hemoglobin A1C", "value": "7.1", "unit": "%", "referenceRange": "< 5.7 (normal), 5.7-6.4 (prediabetes), ≥ 6.5 (diabetes)", "flag": "High" },
+        { "label": "Total Cholesterol", "value": "188", "unit": "mg/dL", "referenceRange": "< 200", "flag": "Normal" },
+        { "label": "LDL Cholesterol", "value": "104", "unit": "mg/dL", "referenceRange": "< 100", "flag": "High" },
+        { "label": "HDL Cholesterol", "value": "52", "unit": "mg/dL", "referenceRange": "> 40", "flag": "Normal" },
+        { "label": "Triglycerides", "value": "130", "unit": "mg/dL", "referenceRange": "< 150", "flag": "Normal" }
+      ]
+    },
     "createdAt": "2026-08-05T12:00:00.000Z",
     "updatedAt": "2026-08-05T12:00:00.000Z"
   },
@@ -18,6 +30,17 @@
     "name": "Electric Bill - August 2026.pdf",
     "dueDate": "2026-08-25T00:00:00.000Z",
     "appointmentId": null,
+    "content": {
+      "provider": "Eversource Energy",
+      "payer": "Margaret Chen",
+      "serviceDate": "2026-08-01T00:00:00.000Z",
+      "lineItems": [
+        { "description": "Electricity usage - 612 kWh @ $0.24/kWh", "amount": 146.88 },
+        { "description": "Delivery & service charge", "amount": 18.4 }
+      ],
+      "insuranceAdjustment": 0,
+      "amountDue": 165.28
+    },
     "createdAt": "2026-08-10T09:00:00.000Z",
     "updatedAt": "2026-08-10T09:00:00.000Z"
   },
@@ -29,6 +52,25 @@
     "name": "Endocrinology Follow-up - Visit Summary.pdf",
     "dueDate": null,
     "appointmentId": "appt-past-1",
+    "content": {
+      "provider": "Dr. Alice Nguyen, Endocrinology",
+      "visitDate": "2026-08-06T14:00:00.000Z",
+      "reasonForVisit": "Routine follow-up for Type 2 Diabetes management.",
+      "vitals": {
+        "Blood pressure": "128/78 mmHg",
+        "Heart rate": "72 bpm",
+        "Weight": "162 lbs",
+        "BMI": "26.4"
+      },
+      "assessment": "Type 2 diabetes, improving control on current regimen. Hemoglobin A1C down to 7.1% from 7.8% at last visit. LDL cholesterol mildly elevated at 104 mg/dL.",
+      "plan": [
+        "Continue Metformin 500mg daily",
+        "Add dietary counseling referral for lipid management",
+        "Repeat comprehensive metabolic panel and lipid panel prior to next visit",
+        "Continue home glucose monitoring twice daily"
+      ],
+      "followUp": "Return to clinic in 3 months (early November 2026)."
+    },
     "createdAt": "2026-08-06T16:30:00.000Z",
     "updatedAt": "2026-08-06T16:30:00.000Z"
   },
@@ -40,6 +82,18 @@
     "name": "Boston Medical Center - Endocrinology Visit Bill.pdf",
     "dueDate": "2026-09-05T00:00:00.000Z",
     "appointmentId": "appt-past-1",
+    "content": {
+      "provider": "Boston Medical Center - Endocrinology",
+      "payer": "Blue Cross Blue Shield of MA",
+      "serviceDate": "2026-08-06T14:00:00.000Z",
+      "lineItems": [
+        { "description": "Office visit - established patient (Level 4)", "amount": 220.0 },
+        { "description": "Diabetes management counseling", "amount": 85.0 },
+        { "description": "Lab draw fee", "amount": 25.0 }
+      ],
+      "insuranceAdjustment": -246.0,
+      "amountDue": 84.0
+    },
     "createdAt": "2026-08-12T10:00:00.000Z",
     "updatedAt": "2026-08-12T10:00:00.000Z"
   },
@@ -51,6 +105,20 @@
     "name": "Comprehensive Metabolic Panel Results.pdf",
     "dueDate": null,
     "appointmentId": "appt-past-1",
+    "content": {
+      "orderedBy": "Dr. Alice Nguyen",
+      "collectedDate": "2026-08-05T08:15:00.000Z",
+      "panelName": "Comprehensive Metabolic Panel",
+      "values": [
+        { "label": "Glucose (fasting)", "value": "142", "unit": "mg/dL", "referenceRange": "70-99", "flag": "High" },
+        { "label": "BUN", "value": "18", "unit": "mg/dL", "referenceRange": "7-20", "flag": "Normal" },
+        { "label": "Creatinine", "value": "0.9", "unit": "mg/dL", "referenceRange": "0.6-1.1", "flag": "Normal" },
+        { "label": "eGFR", "value": "68", "unit": "mL/min/1.73m²", "referenceRange": "> 60", "flag": "Normal" },
+        { "label": "Sodium", "value": "140", "unit": "mmol/L", "referenceRange": "135-145", "flag": "Normal" },
+        { "label": "Potassium", "value": "4.3", "unit": "mmol/L", "referenceRange": "3.5-5.0", "flag": "Normal" },
+        { "label": "Calcium", "value": "9.4", "unit": "mg/dL", "referenceRange": "8.5-10.2", "flag": "Normal" }
+      ]
+    },
     "createdAt": "2026-08-05T09:00:00.000Z",
     "updatedAt": "2026-08-05T09:00:00.000Z"
   },
@@ -62,6 +130,24 @@
     "name": "Cardiology Follow-up - Visit Summary.pdf",
     "dueDate": null,
     "appointmentId": "appt-upcoming-1",
+    "content": {
+      "provider": "Dr. Raj Patel, Cardiology",
+      "visitDate": "2026-07-09T15:00:00.000Z",
+      "reasonForVisit": "Follow-up for hypertension and evaluation of occasional palpitations.",
+      "vitals": {
+        "Blood pressure": "138/86 mmHg",
+        "Heart rate": "76 bpm",
+        "Weight": "162 lbs"
+      },
+      "assessment": "Stable hypertension on current regimen. Occasional palpitations reported, most likely benign, but warrant baseline EKG and echocardiogram given family history of cardiac disease.",
+      "plan": [
+        "Order 12-lead EKG",
+        "Order echocardiogram prior to next visit",
+        "Continue current blood pressure management",
+        "Reassess in 6 weeks"
+      ],
+      "followUp": "Cardiology Checkup scheduled for August 20, 2026."
+    },
     "createdAt": "2026-07-09T15:00:00.000Z",
     "updatedAt": "2026-07-09T15:00:00.000Z"
   },
@@ -73,6 +159,17 @@
     "name": "Brigham Heart & Vascular Center - Visit Bill.pdf",
     "dueDate": "2026-08-09T00:00:00.000Z",
     "appointmentId": "appt-upcoming-1",
+    "content": {
+      "provider": "Brigham Heart & Vascular Center",
+      "payer": "Blue Cross Blue Shield of MA",
+      "serviceDate": "2026-07-09T15:00:00.000Z",
+      "lineItems": [
+        { "description": "Office visit - established patient (Level 4)", "amount": 240.0 },
+        { "description": "Electrocardiogram, 12-lead with interpretation", "amount": 95.0 }
+      ],
+      "insuranceAdjustment": -251.75,
+      "amountDue": 83.25
+    },
     "createdAt": "2026-07-15T09:00:00.000Z",
     "updatedAt": "2026-07-15T09:00:00.000Z"
   },
@@ -84,6 +181,13 @@
     "name": "EKG Results.pdf",
     "dueDate": null,
     "appointmentId": "appt-upcoming-1",
+    "content": {
+      "orderedBy": "Dr. Raj Patel",
+      "performedDate": "2026-07-09T15:20:00.000Z",
+      "studyName": "12-Lead Electrocardiogram",
+      "findings": "Normal sinus rhythm at 76 bpm. Normal axis. No ST-segment or T-wave abnormalities. No evidence of arrhythmia, ischemia, or prior infarct.",
+      "impression": "Normal 12-lead EKG."
+    },
     "createdAt": "2026-07-09T15:30:00.000Z",
     "updatedAt": "2026-07-09T15:30:00.000Z"
   },
@@ -95,7 +199,14 @@
     "name": "Echocardiogram Results.pdf",
     "dueDate": null,
     "appointmentId": "appt-upcoming-1",
-    "createdAt": "2026-08-13T10:00:00.000Z",
-    "updatedAt": "2026-08-13T10:00:00.000Z"
+    "content": {
+      "orderedBy": "Dr. Raj Patel",
+      "performedDate": "2026-08-13T10:00:00.000Z",
+      "studyName": "Transthoracic Echocardiogram",
+      "findings": "Left ventricular ejection fraction 58% (normal range 55-70%). Mild left ventricular hypertrophy consistent with history of hypertension. No significant valvular abnormalities. No pericardial effusion.",
+      "impression": "Preserved ejection fraction with mild LVH; no significant structural abnormality."
+    },
+    "createdAt": "2026-08-13T10:30:00.000Z",
+    "updatedAt": "2026-08-13T10:30:00.000Z"
   }
 ]
