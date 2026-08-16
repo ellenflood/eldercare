@@ -8,7 +8,7 @@ export default function ChildCalendarPage() {
 
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Calendar</h1>
+      <h1 className="text-[1.8rem] font-semibold">Calendar</h1>
       <p className="text-sm text-muted-foreground">
         Appointments, bill due dates, and prescription refills in one view. Click a date with something on it
         to jump to the details below.

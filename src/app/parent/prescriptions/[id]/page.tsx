@@ -26,7 +26,7 @@ export default async function PrescriptionDetailPage({ params }: PageProps<"/par
       <Card>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold">{prescription.name}</h1>
+            <h1 className="text-[1.8rem] font-semibold">{prescription.name}</h1>
             <p className="text-sm text-muted-foreground mt-1">{prescription.specialty}</p>
           </div>
           <form action={deletePrescriptionAction}>

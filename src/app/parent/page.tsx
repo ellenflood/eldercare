@@ -43,7 +43,7 @@ export default function ParentDashboard() {
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">Welcome back, {parent.name}</h1>
+          <h1 className="text-[1.8rem] font-semibold">Welcome back, {parent.name}</h1>
           <p className="text-sm text-muted-foreground mt-1">{parent.condition} · Age {parent.age}</p>
         </div>
         <p className="text-sm text-muted-foreground shrink-0 pt-1">{formatFullDate()}</p>

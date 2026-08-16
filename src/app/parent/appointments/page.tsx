@@ -13,7 +13,7 @@ export default function AppointmentsPage() {
 
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Appointments</h1>
+      <h1 className="text-[1.8rem] font-semibold">Appointments</h1>
 
       <Card>
         <ul className="divide-y divide-border">

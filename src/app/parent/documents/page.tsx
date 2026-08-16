@@ -11,7 +11,7 @@ export default function DocumentsPage() {
 
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Documents</h1>
+      <h1 className="text-[1.8rem] font-semibold">Documents</h1>
 
       <Card>
         <ul className="divide-y divide-border">

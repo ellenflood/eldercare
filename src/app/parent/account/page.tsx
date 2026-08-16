@@ -19,7 +19,7 @@ export default function ParentAccountPage() {
 
   return (
     <div className="mx-auto max-w-2xl w-full px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Account</h1>
+      <h1 className="text-[1.8rem] font-semibold">Account</h1>
       <Card>
         <dl className="grid grid-cols-2 gap-4 text-sm">
           {fields.map(([label, value]) => (

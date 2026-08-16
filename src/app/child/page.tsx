@@ -53,7 +53,7 @@ export default function ChildDashboard() {
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">Hi {child.name}</h1>
+          <h1 className="text-[1.8rem] font-semibold">Hi {child.name}</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Keeping an eye on {parent.name} ({parent.condition})
           </p>

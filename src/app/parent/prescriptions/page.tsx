@@ -19,7 +19,7 @@ export default function PrescriptionsPage() {
 
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Prescriptions</h1>
+      <h1 className="text-[1.8rem] font-semibold">Prescriptions</h1>
 
       <div className="space-y-4">
         {prescriptions.map((rx) => (
