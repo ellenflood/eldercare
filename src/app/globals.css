@@ -19,7 +19,11 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-accent-subtle: var(--accent-subtle);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -68,24 +72,28 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.92 0.04 86.47);
-  --primary-foreground: oklch(0.31 0.02 86.64);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #f4f3ee;
+  --foreground: #1f1c18;
+  --card: #fefdfc;
+  --card-foreground: #1f1c18;
+  --popover: #fefdfc;
+  --popover-foreground: #1f1c18;
+  --primary: #1f1c18;
+  --primary-foreground: #f4f3ee;
+  --secondary: #e8e6e1;
+  --secondary-foreground: #1f1c18;
+  --muted: #e8e6e1;
+  --muted-foreground: #625f5b;
+  --accent: #bc8b4c;
+  --accent-foreground: #e8e6e1;
+  --accent-hover: #a87a3b;
+  --accent-light: #e7d7be;
+  --accent-subtle: #f3ede3;
+  --destructive: #e40014;
+  --success: #668667;
+  --border: #d9d7d2;
+  --input: #d9d7d2;
+  --ring: #bc8b4c;
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -102,7 +110,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --radius: 8px;
+  --radius: .625rem;
 
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
@@ -117,34 +125,38 @@
     0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 
-  --font-sans: var(--font-dm-sans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  --display-family: var(--font-sans);
-  --text-family: var(--font-inter);
-  --display-weight: 600;
+  --display-family: var(--font-dm-serif), "DM Serif Display", serif;
+  --text-family: var(--font-dm-sans);
+  --display-weight: 400;
   --text-weight: 400;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: #13110d;
+  --foreground: #e8e6e1;
+  --card: #1a1714;
+  --card-foreground: #e8e6e1;
+  --popover: #1a1714;
+  --popover-foreground: #e8e6e1;
+  --primary: #e8e6e1;
+  --primary-foreground: #13110d;
+  --secondary: #211e1b;
+  --secondary-foreground: #e8e6e1;
+  --muted: #26231f;
+  --muted-foreground: #7f7c77;
+  --accent: #c99858;
+  --accent-foreground: #13110d;
+  --accent-hover: #dcab6d;
+  --accent-light: #3e3323;
+  --accent-subtle: #231e17;
+  --destructive: #e40014;
+  --success: #668667;
+  --border: #302d29;
+  --input: #302d29;
+  --ring: #c99858;
 
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -186,11 +198,10 @@
     font-weight: var(--text-weight);
   }
   h1,
-  h2,
-  h3,
   .font-display {
     font-family: var(--font-display);
     font-weight: var(--display-weight);
+    font-style: italic;
     font-feature-settings:
       "ss02" on,
       "ss03" on,

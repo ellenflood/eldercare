@@ -1,18 +1,18 @@
 const STYLES: Record<string, string> = {
-  Attended: "bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300",
-  Answered: "bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300",
-  Pending: "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
-  "Not Answered": "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
-  Deferred: "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
-  "Didn't attend": "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300",
-  Rejected: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300",
+  Attended: "border-success/30 bg-success/10 text-success",
+  Answered: "border-success/30 bg-success/10 text-success",
+  Pending: "border-accent-light bg-accent-subtle text-accent-hover",
+  "Not Answered": "border-accent-light bg-accent-subtle text-accent-hover",
+  Deferred: "border-accent-light bg-accent-subtle text-accent-hover",
+  "Didn't attend": "border-destructive/30 bg-destructive/10 text-destructive",
+  Rejected: "border-destructive/30 bg-destructive/10 text-destructive",
 };
 
 export default function StatusBadge({ status }: { status: string }) {
   return (
     <span
-      className={`text-xs font-medium px-2 py-1 rounded-full whitespace-nowrap ${
-        STYLES[status] ?? "bg-secondary text-secondary-foreground"
+      className={`inline-flex items-center rounded-full border font-mono text-[0.625rem] font-medium uppercase tracking-wider px-2 py-1 whitespace-nowrap ${
+        STYLES[status] ?? "border-border bg-secondary text-secondary-foreground"
       }`}
     >
       {status}

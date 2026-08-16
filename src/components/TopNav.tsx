@@ -30,17 +30,17 @@ export default function TopNav() {
         </Link>
 
         {links.length > 0 && (
-          <nav className="flex items-center gap-1 overflow-x-auto text-sm">
+          <nav className="flex items-center gap-1 overflow-x-auto">
             {links.map((link) => {
               const active = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded-full whitespace-nowrap transition-colors ${
+                  className={`px-3 py-1.5 rounded-full whitespace-nowrap transition-colors font-mono text-xs uppercase tracking-wider ${
                     active
                       ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-accent"
+                      : "text-muted-foreground hover:bg-accent-subtle hover:text-accent-hover"
                   }`}
                 >
                   {link.label}
@@ -50,7 +50,7 @@ export default function TopNav() {
           </nav>
         )}
 
-        <div className="ml-auto flex items-center gap-2 text-sm shrink-0">
+        <div className="ml-auto flex items-center gap-2 font-mono text-xs uppercase tracking-wider shrink-0">
           {section && (
             <span className="hidden sm:inline text-muted-foreground">
               Viewing as {section === "parent" ? "Parent" : "Child"}
@@ -58,7 +58,7 @@ export default function TopNav() {
           )}
           <Link
             href="/"
-            className="px-3 py-1.5 rounded-full border border-border hover:bg-accent"
+            className="px-3 py-1.5 rounded-full border border-border hover:bg-accent-subtle hover:text-accent-hover"
           >
             Switch view
           </Link>

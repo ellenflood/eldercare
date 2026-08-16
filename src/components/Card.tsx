@@ -14,15 +14,15 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
 export function CardTitle({ children, action }: { children: ReactNode; action?: ReactNode }) {
   return (
     <div className="flex items-center justify-between mb-3">
-      <h2 className="font-display font-medium text-sm uppercase tracking-wide text-muted-foreground">{children}</h2>
+      <h2 className="font-mono font-medium text-xs uppercase tracking-wider text-accent">{children}</h2>
       {action}
     </div>
   );
 }
 
 const TONE_TEXT: Record<"ok" | "warning" | "neutral", string> = {
-  ok: "text-emerald-600 dark:text-emerald-400",
-  warning: "text-amber-600 dark:text-amber-400",
+  ok: "text-success",
+  warning: "text-accent",
   neutral: "",
 };
 
