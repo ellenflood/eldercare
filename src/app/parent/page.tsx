@@ -3,7 +3,8 @@ import { Card, CardTitle, StatPill } from "@/components/Card";
 import Sparkline from "@/components/Sparkline";
 import StatusBadge from "@/components/StatusBadge";
 import WearableStatusLine from "@/components/WearableStatusLine";
-import { formatDate, formatDateTime, formatFullDate, formatTime } from "@/lib/format";
+import { formatDate, formatDateTime, formatFullDate } from "@/lib/format";
+import { combineWearableStatus, nextUpcomingAppointment, refillsDueThisWeek, todayDoseAdherence } from "@/lib/insights";
 import { getAppointments, getDeviceLogs, getDocuments, getParent, getPrescriptions, getReminders } from "@/lib/store";
 import { assessHeartRate, assessSleep } from "@/lib/wearable";
 
@@ -17,7 +18,6 @@ export default function ParentDashboard() {
   const reminders = getReminders();
   const deviceLogs = getDeviceLogs();
 
-  const upcoming = appointments.filter((a) => a.status === "Pending").slice(0, 3);
   const heartRate = deviceLogs
     .filter((l) => l.type === "HeartRate")
     .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
@@ -26,6 +26,11 @@ export default function ParentDashboard() {
     .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
   const heartRateAssessment = assessHeartRate(heartRate);
   const sleepAssessment = assessSleep(sleep);
+  const wearableStatus = combineWearableStatus(heartRateAssessment, sleepAssessment);
+
+  const nextAppointment = nextUpcomingAppointment(appointments);
+  const refills = refillsDueThisWeek(prescriptions, reminders);
+  const adherence = todayDoseAdherence(reminders);
 
   function latestDoseStatus(prescriptionId: string) {
     const doseReminders = reminders
@@ -45,10 +50,25 @@ export default function ParentDashboard() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <StatPill label="Active prescriptions" value={String(prescriptions.length)} />
-        <StatPill label="Upcoming appointments" value={String(appointments.filter((a) => a.status === "Pending").length)} />
-        <StatPill label="Documents" value={String(documents.length)} />
-        <StatPill label="Linked devices" value="1" />
+        <StatPill
+          label="Upcoming appointment"
+          value={nextAppointment ? nextAppointment.name : "None scheduled"}
+          hint={nextAppointment ? formatDateTime(nextAppointment.appointmentTime) : undefined}
+        />
+        <StatPill
+          label="Refills this week"
+          value={refills.length > 0 ? refills.map((r) => r.prescription.name).join(", ") : "None due"}
+        />
+        <StatPill
+          label="Today's doses"
+          value={adherence.total > 0 ? `${adherence.taken} of ${adherence.total} taken` : "None scheduled"}
+          tone={adherence.total > 0 && adherence.taken < adherence.total ? "warning" : "ok"}
+        />
+        <StatPill
+          label="Wearable status"
+          value={wearableStatus.status === "warning" ? "Attention needed" : "All normal"}
+          tone={wearableStatus.status}
+        />
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -124,12 +144,6 @@ export default function ParentDashboard() {
           </div>
         </Card>
       </div>
-
-      {upcoming.length > 0 && (
-        <p className="text-xs text-black/40 dark:text-white/40 text-center">
-          Next appointment: {upcoming[0].name} at {formatTime(upcoming[0].appointmentTime)} on {formatDate(upcoming[0].appointmentTime)}
-        </p>
-      )}
     </div>
   );
 }

@@ -2,8 +2,10 @@ import Link from "next/link";
 import AlertsFeed from "@/components/AlertsFeed";
 import { Card, CardTitle, StatPill } from "@/components/Card";
 import StatusBadge from "@/components/StatusBadge";
-import { formatDateTime, formatFullDate } from "@/lib/format";
-import { getAlerts, getAppointments, getChild, getDeviceLogs, getParent, getPrescriptions } from "@/lib/store";
+import { formatDate, formatDateTime, formatFullDate } from "@/lib/format";
+import { combineWearableStatus, nextUpcomingAppointment, refillsDueThisWeek } from "@/lib/insights";
+import { getAlerts, getAppointments, getChild, getDeviceLogs, getParent, getPrescriptions, getReminders } from "@/lib/store";
+import { assessHeartRate, assessSleep } from "@/lib/wearable";
 
 export const dynamic = "force-dynamic";
 
@@ -12,12 +14,22 @@ export default function ChildDashboard() {
   const parent = getParent();
   const appointments = getAppointments();
   const prescriptions = getPrescriptions();
+  const reminders = getReminders();
   const deviceLogs = getDeviceLogs();
   const alerts = getAlerts();
 
   const upcoming = appointments.filter((a) => a.status === "Pending").slice(0, 3);
-  const latestHr = [...deviceLogs].reverse().find((l) => l.type === "HeartRate");
-  const latestSleep = [...deviceLogs].reverse().find((l) => l.type === "SleepDuration");
+
+  const heartRate = deviceLogs
+    .filter((l) => l.type === "HeartRate")
+    .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
+  const sleep = deviceLogs
+    .filter((l) => l.type === "SleepDuration")
+    .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
+  const wearableStatus = combineWearableStatus(assessHeartRate(heartRate), assessSleep(sleep));
+
+  const nextAppointment = nextUpcomingAppointment(appointments);
+  const refills = refillsDueThisWeek(prescriptions, reminders);
 
   return (
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
@@ -32,10 +44,21 @@ export default function ChildDashboard() {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <StatPill label="Active alerts" value={String(alerts.length)} />
-        <StatPill label="Prescriptions" value={String(prescriptions.length)} />
-        <StatPill label="Latest heart rate" value={latestHr ? `${latestHr.value} bpm` : "—"} />
-        <StatPill label="Latest sleep" value={latestSleep ? `${latestSleep.value}h` : "—"} />
+        <StatPill
+          label="Upcoming appointment"
+          value={nextAppointment ? nextAppointment.name : "None scheduled"}
+          hint={nextAppointment ? formatDateTime(nextAppointment.appointmentTime) : undefined}
+        />
+        <StatPill
+          label="Refills this week"
+          value={refills.length > 0 ? refills.map((r) => r.prescription.name).join(", ") : "None due"}
+        />
+        <StatPill label="Active alerts" value={String(alerts.length)} tone={alerts.length > 0 ? "warning" : "ok"} />
+        <StatPill
+          label="Wearable status"
+          value={wearableStatus.status === "warning" ? "Attention needed" : "All normal"}
+          tone={wearableStatus.status}
+        />
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -63,6 +86,10 @@ export default function ChildDashboard() {
         <Card>
           <CardTitle>Parent snapshot</CardTitle>
           <dl className="grid grid-cols-2 gap-3 text-sm">
+            <div>
+              <dt className="text-black/40 dark:text-white/40">Name</dt>
+              <dd className="font-medium">{parent.name}</dd>
+            </div>
             <div>
               <dt className="text-black/40 dark:text-white/40">Condition</dt>
               <dd className="font-medium">{parent.condition}</dd>

@@ -23,28 +23,6 @@
     "updatedAt": "2026-08-05T12:00:00.000Z"
   },
   {
-    "id": "doc-bill-1",
-    "parentId": "parent-1",
-    "link": "/mock-files/electric-bill-aug.pdf",
-    "type": "Bill",
-    "name": "Electric Bill - August 2026.pdf",
-    "dueDate": "2026-08-25T00:00:00.000Z",
-    "appointmentId": null,
-    "content": {
-      "provider": "Eversource Energy",
-      "payer": "Margaret Chen",
-      "serviceDate": "2026-08-01T00:00:00.000Z",
-      "lineItems": [
-        { "description": "Electricity usage - 612 kWh @ $0.24/kWh", "amount": 146.88 },
-        { "description": "Delivery & service charge", "amount": 18.4 }
-      ],
-      "insuranceAdjustment": 0,
-      "amountDue": 165.28
-    },
-    "createdAt": "2026-08-10T09:00:00.000Z",
-    "updatedAt": "2026-08-10T09:00:00.000Z"
-  },
-  {
     "id": "doc-endo-visit-summary-1",
     "parentId": "parent-1",
     "link": "/mock-files/endo-visit-summary-aug6.pdf",
