@@ -153,12 +153,12 @@ export default function ParentDashboard() {
           <div className="space-y-5">
             <div>
               <p className="text-xs text-muted-foreground mb-1">Heart rate (bpm)</p>
-              <Sparkline points={heartRate} color="#ef4444" unit=" bpm" />
+              <Sparkline points={heartRate} color="var(--chart-1)" unit=" bpm" yPadding={10} />
               <WearableStatusLine assessment={heartRateAssessment} />
             </div>
             <div>
               <p className="text-xs text-muted-foreground mb-1">Sleep duration (hrs)</p>
-              <Sparkline points={sleep} color="#6366f1" unit="h" decimals={1} />
+              <Sparkline points={sleep} color="var(--chart-2)" unit="h" decimals={1} yPadding={2} />
               <WearableStatusLine assessment={sleepAssessment} />
             </div>
           </div>
