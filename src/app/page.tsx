@@ -14,7 +14,7 @@ export default function Home() {
           Demo v1
         </span>
         <h1 className="text-4xl font-semibold tracking-tight">WithYou</h1>
-        <p className="text-muted-foreground max-w-md">Every step of the way...</p>
+        <p className="text-muted-foreground max-w-md">Care management wherever you are</p>
 
         <div className="grid sm:grid-cols-2 gap-4 w-full mt-4">
           <Link
