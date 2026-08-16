@@ -3,8 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
+  addAppointment,
   addDocument,
   addPrescription,
+  deleteAppointment,
   deletePrescription,
   getParent,
   getReminder,
@@ -112,6 +114,42 @@ export async function updateAppointmentStatusAction(formData: FormData) {
   revalidatePath("/parent/appointments");
   revalidatePath(`/parent/appointments/${id}`);
   revalidatePath("/parent");
+}
+
+export async function createAppointmentAction(formData: FormData) {
+  const name = String(formData.get("name") ?? "").trim();
+  const specialty = String(formData.get("specialty") ?? "").trim();
+  const provider = String(formData.get("provider") ?? "").trim();
+  const location = String(formData.get("location") ?? "").trim();
+  const appointmentTime = String(formData.get("appointmentTime") ?? "");
+
+  if (!name || !provider || !appointmentTime) return;
+
+  const parsedTime = new Date(appointmentTime);
+  if (Number.isNaN(parsedTime.getTime())) return;
+
+  addAppointment({
+    name,
+    specialty: specialty || "General",
+    provider,
+    location: location || "TBD",
+    appointmentTime: parsedTime.toISOString(),
+  });
+
+  revalidatePath("/parent/appointments");
+  revalidatePath("/parent/calendar");
+  revalidatePath("/parent");
+  revalidatePath("/child");
+}
+
+export async function deleteAppointmentAction(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  deleteAppointment(id);
+  revalidatePath("/parent/appointments");
+  revalidatePath("/parent/calendar");
+  revalidatePath("/parent");
+  revalidatePath("/child");
 }
 
 export async function completeSignupAction(formData: FormData) {

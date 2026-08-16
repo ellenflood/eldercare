@@ -260,6 +260,33 @@ export function updateAppointmentStatus(id: string, status: Appointment["status"
   return appointment;
 }
 
+export function addAppointment(input: Omit<Appointment, "id" | "createdAt" | "updatedAt" | "parentId" | "status">): Appointment {
+  const store = getStore();
+  const now = new Date().toISOString();
+  const appointment: Appointment = {
+    ...input,
+    id: `appt-${crypto.randomUUID()}`,
+    parentId: store.parents[0].id,
+    status: "Pending",
+    createdAt: now,
+    updatedAt: now,
+  };
+  store.appointments.push(appointment);
+  return appointment;
+}
+
+export function deleteAppointment(id: string): void {
+  const store = getStore();
+  store.appointments = store.appointments.filter((a) => a.id !== id);
+  store.reminders = store.reminders.filter((r) => !(r.relatedType === "Appointment" && r.relatedId === id));
+  for (const document of store.documents) {
+    if (document.appointmentId === id) {
+      document.appointmentId = null;
+      document.updatedAt = new Date().toISOString();
+    }
+  }
+}
+
 /**
  * Applies a Twilio DTMF response to whatever the reminder is linked to.
  * Valid digits are type-dependent — see ALLOWED_DIGITS in the webhook route,
