@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Alert } from "@/lib/types";
 import { formatDateTime } from "@/lib/format";
 
@@ -7,7 +8,7 @@ function severityStyle(severity: number): string {
   return "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300";
 }
 
-export default function AlertsFeed({ alerts }: { alerts: Alert[] }) {
+export default function AlertsFeed({ alerts }: { alerts: { alert: Alert; href: string | null }[] }) {
   if (alerts.length === 0) {
     return (
       <p className="text-sm text-black/50 dark:text-white/50 py-6 text-center">
@@ -18,10 +19,16 @@ export default function AlertsFeed({ alerts }: { alerts: Alert[] }) {
 
   return (
     <ul className="divide-y divide-black/5 dark:divide-white/10">
-      {alerts.map((alert) => (
+      {alerts.map(({ alert, href }) => (
         <li key={alert.id} className="py-3 flex items-start justify-between gap-3">
           <div>
-            <p className="text-sm font-medium">{alert.name}</p>
+            {href ? (
+              <Link href={href} className="text-sm font-medium hover:underline">
+                {alert.name}
+              </Link>
+            ) : (
+              <p className="text-sm font-medium">{alert.name}</p>
+            )}
             <p className="text-xs text-black/40 dark:text-white/40 mt-0.5">
               {alert.type} · {formatDateTime(alert.createdAt)}
             </p>

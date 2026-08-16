@@ -100,6 +100,10 @@ export function getPrescriptions(): Prescription[] {
   return getStore().prescriptions;
 }
 
+export function getPrescription(id: string): Prescription | undefined {
+  return getStore().prescriptions.find((p) => p.id === id);
+}
+
 /**
  * Alerts are derived, not stored: they're recomputed from the current
  * reminder/prescription state on every read. This is what makes the alerts

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardTitle } from "@/components/Card";
 import StatusBadge from "@/components/StatusBadge";
 import { createPrescriptionAction, deletePrescriptionAction } from "@/lib/actions";
@@ -25,7 +26,9 @@ export default function PrescriptionsPage() {
           <Card key={rx.id}>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-medium">{rx.name}</p>
+                <Link href={`/parent/prescriptions/${rx.id}`} className="font-medium hover:underline">
+                  {rx.name}
+                </Link>
                 <p className="text-xs text-black/40 dark:text-white/40 mt-0.5">
                   {rx.specialty} · {rx.dosage}
                   {rx.dosageUnit} · {rx.frequency} · since {formatDate(rx.startDate)}

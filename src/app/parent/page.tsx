@@ -54,10 +54,24 @@ export default function ParentDashboard() {
           label="Upcoming appointment"
           value={nextAppointment ? nextAppointment.name : "None scheduled"}
           hint={nextAppointment ? formatDateTime(nextAppointment.appointmentTime) : undefined}
+          href={nextAppointment ? `/parent/appointments/${nextAppointment.id}` : undefined}
         />
         <StatPill
           label="Refills this week"
-          value={refills.length > 0 ? refills.map((r) => r.prescription.name).join(", ") : "None due"}
+          value={
+            refills.length > 0 ? (
+              refills.map((r, i) => (
+                <span key={r.prescription.id}>
+                  {i > 0 && ", "}
+                  <Link href={`/parent/prescriptions/${r.prescription.id}`} className="hover:underline">
+                    {r.prescription.name}
+                  </Link>
+                </span>
+              ))
+            ) : (
+              "None due"
+            )
+          }
         />
         <StatPill
           label="Today's doses"
@@ -101,7 +115,9 @@ export default function ParentDashboard() {
               return (
                 <li key={rx.id} className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-sm font-medium">{rx.name}</p>
+                    <Link href={`/parent/prescriptions/${rx.id}`} className="text-sm font-medium hover:underline">
+                      {rx.name}
+                    </Link>
                     <p className="text-xs text-black/40 dark:text-white/40">
                       {rx.dosage}
                       {rx.dosageUnit} · {rx.frequency}
@@ -121,7 +137,9 @@ export default function ParentDashboard() {
           <ul className="space-y-3">
             {documents.slice(0, 3).map((d) => (
               <li key={d.id} className="flex items-center justify-between gap-3">
-                <p className="text-sm font-medium truncate">{d.name}</p>
+                <Link href={`/parent/documents/${d.id}`} className="text-sm font-medium truncate hover:underline">
+                  {d.name}
+                </Link>
                 <span className="text-xs text-black/40 dark:text-white/40 shrink-0">{d.type}</span>
               </li>
             ))}

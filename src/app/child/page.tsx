@@ -5,6 +5,7 @@ import StatusBadge from "@/components/StatusBadge";
 import { formatDate, formatDateTime, formatFullDate } from "@/lib/format";
 import { combineWearableStatus, nextUpcomingAppointment, refillsDueThisWeek } from "@/lib/insights";
 import { getAlerts, getAppointments, getChild, getDeviceLogs, getParent, getPrescriptions, getReminders } from "@/lib/store";
+import type { Alert } from "@/lib/types";
 import { assessHeartRate, assessSleep } from "@/lib/wearable";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +32,23 @@ export default function ChildDashboard() {
   const nextAppointment = nextUpcomingAppointment(appointments);
   const refills = refillsDueThisWeek(prescriptions, reminders);
 
+  function alertHref(alert: Alert): string | null {
+    if (alert.sourceType === "Prescription") return `/parent/prescriptions/${alert.sourceId}`;
+    if (alert.sourceType === "Appointment") return `/parent/appointments/${alert.sourceId}`;
+    if (alert.sourceType === "Document") return `/parent/documents/${alert.sourceId}`;
+    if (alert.sourceType === "Reminder") {
+      const reminder = reminders.find((r) => r.id === alert.sourceId);
+      if (reminder?.relatedType === "Appointment" && reminder.relatedId) {
+        return `/parent/appointments/${reminder.relatedId}`;
+      }
+      if (reminder?.relatedType === "Prescription" && reminder.relatedId) {
+        return `/parent/prescriptions/${reminder.relatedId}`;
+      }
+    }
+    return null;
+  }
+  const alertsWithHref = alerts.map((alert) => ({ alert, href: alertHref(alert) }));
+
   return (
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
       <div className="flex items-start justify-between gap-4">
@@ -48,10 +66,24 @@ export default function ChildDashboard() {
           label="Upcoming appointment"
           value={nextAppointment ? nextAppointment.name : "None scheduled"}
           hint={nextAppointment ? formatDateTime(nextAppointment.appointmentTime) : undefined}
+          href={nextAppointment ? `/parent/appointments/${nextAppointment.id}` : undefined}
         />
         <StatPill
           label="Refills this week"
-          value={refills.length > 0 ? refills.map((r) => r.prescription.name).join(", ") : "None due"}
+          value={
+            refills.length > 0 ? (
+              refills.map((r, i) => (
+                <span key={r.prescription.id}>
+                  {i > 0 && ", "}
+                  <Link href={`/parent/prescriptions/${r.prescription.id}`} className="hover:underline">
+                    {r.prescription.name}
+                  </Link>
+                </span>
+              ))
+            ) : (
+              "None due"
+            )
+          }
         />
         <StatPill label="Active alerts" value={String(alerts.length)} tone={alerts.length > 0 ? "warning" : "ok"} />
         <StatPill
@@ -64,7 +96,7 @@ export default function ChildDashboard() {
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="md:col-span-2">
           <CardTitle>Alerts</CardTitle>
-          <AlertsFeed alerts={alerts} />
+          <AlertsFeed alerts={alertsWithHref} />
         </Card>
 
         <Card>
@@ -73,7 +105,9 @@ export default function ChildDashboard() {
             {upcoming.map((a) => (
               <li key={a.id} className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium">{a.name}</p>
+                  <Link href={`/parent/appointments/${a.id}`} className="text-sm font-medium hover:underline">
+                    {a.name}
+                  </Link>
                   <p className="text-xs text-black/40 dark:text-white/40">{formatDateTime(a.appointmentTime)}</p>
                 </div>
                 <StatusBadge status={a.status} />
@@ -96,7 +130,16 @@ export default function ChildDashboard() {
             </div>
             <div>
               <dt className="text-black/40 dark:text-white/40">Prescriptions</dt>
-              <dd className="font-medium">{prescriptions.map((p) => p.name).join(", ")}</dd>
+              <dd className="font-medium">
+                {prescriptions.map((p, i) => (
+                  <span key={p.id}>
+                    {i > 0 && ", "}
+                    <Link href={`/parent/prescriptions/${p.id}`} className="hover:underline">
+                      {p.name}
+                    </Link>
+                  </span>
+                ))}
+              </dd>
             </div>
           </dl>
           <Link href="/child/account" className="text-xs text-black/40 hover:underline mt-4 inline-block">

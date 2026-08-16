@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card } from "@/components/Card";
 import MonthCalendar from "@/components/MonthCalendar";
 import { formatDate, formatTime } from "@/lib/format";
@@ -10,6 +11,7 @@ interface CalendarEvent {
   kind: "Appointment" | "Bill" | "Prescription refill";
   title: string;
   detail: string;
+  href: string;
 }
 
 const KIND_COLOR: Record<CalendarEvent["kind"], string> = {
@@ -32,12 +34,19 @@ export default function CalendarPage() {
       kind: "Appointment",
       title: appt.name,
       detail: `${appt.provider} · ${appt.location}`,
+      href: `/parent/appointments/${appt.id}`,
     });
   }
 
   for (const doc of documents) {
     if (doc.type === "Bill" && doc.dueDate) {
-      events.push({ date: doc.dueDate, kind: "Bill", title: doc.name, detail: "Due date" });
+      events.push({
+        date: doc.dueDate,
+        kind: "Bill",
+        title: doc.name,
+        detail: "Due date",
+        href: `/parent/documents/${doc.id}`,
+      });
     }
   }
 
@@ -51,6 +60,7 @@ export default function CalendarPage() {
         kind: "Prescription refill",
         title: rx.name,
         detail: `${rx.dosage}${rx.dosageUnit} · ${rx.frequency}`,
+        href: `/parent/prescriptions/${rx.id}`,
       });
     }
   }
@@ -75,7 +85,9 @@ export default function CalendarPage() {
             <li key={i} className="py-3 flex items-center gap-4">
               <div className="w-20 shrink-0 text-sm font-medium">{formatDate(e.date)}</div>
               <div className="flex-1">
-                <p className="text-sm font-medium">{e.title}</p>
+                <Link href={e.href} className="text-sm font-medium hover:underline">
+                  {e.title}
+                </Link>
                 <p className="text-xs text-black/40 dark:text-white/40">
                   {e.detail} · {formatTime(e.date)}
                 </p>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -30,17 +31,31 @@ export function StatPill({
   value,
   hint,
   tone = "neutral",
+  href,
 }: {
   label: string;
-  value: string;
+  value: ReactNode;
   hint?: string;
   tone?: "ok" | "warning" | "neutral";
+  href?: string;
 }) {
-  return (
-    <div className="rounded-xl bg-black/5 dark:bg-white/10 px-4 py-3">
+  const content = (
+    <>
       <div className="text-xs text-black/50 dark:text-white/50">{label}</div>
-      <div className={`text-base font-semibold mt-0.5 leading-snug ${TONE_TEXT[tone]}`}>{value}</div>
+      <div className={`text-base font-semibold mt-0.5 leading-snug ${TONE_TEXT[tone]} ${href ? "hover:underline" : ""}`}>
+        {value}
+      </div>
       {hint && <div className="text-xs text-black/40 dark:text-white/40 mt-0.5">{hint}</div>}
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block rounded-xl bg-black/5 dark:bg-white/10 px-4 py-3 hover:bg-black/10 dark:hover:bg-white/15 transition-colors">
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className="rounded-xl bg-black/5 dark:bg-white/10 px-4 py-3">{content}</div>;
 }
