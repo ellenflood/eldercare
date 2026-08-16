@@ -1,4 +1,5 @@
 import { Card } from "@/components/Card";
+import MonthCalendar from "@/components/MonthCalendar";
 import { formatDate, formatTime } from "@/lib/format";
 import { getAppointments, getDocuments, getPrescriptions, getReminders } from "@/lib/store";
 
@@ -64,6 +65,11 @@ export default function CalendarPage() {
       </p>
 
       <Card>
+        <MonthCalendar events={events} />
+      </Card>
+
+      <Card>
+        <p className="text-xs uppercase tracking-wide text-black/40 dark:text-white/40 mb-2">Agenda</p>
         <ul className="divide-y divide-black/5 dark:divide-white/10">
           {events.map((e, i) => (
             <li key={i} className="py-3 flex items-center gap-4">

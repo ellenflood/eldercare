@@ -2,7 +2,7 @@ import Link from "next/link";
 import AlertsFeed from "@/components/AlertsFeed";
 import { Card, CardTitle, StatPill } from "@/components/Card";
 import StatusBadge from "@/components/StatusBadge";
-import { formatDateTime } from "@/lib/format";
+import { formatDateTime, formatFullDate } from "@/lib/format";
 import { getAlerts, getAppointments, getChild, getDeviceLogs, getParent, getPrescriptions } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -21,11 +21,14 @@ export default function ChildDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Hi {child.name}</h1>
-        <p className="text-sm text-black/50 dark:text-white/50 mt-1">
-          Keeping an eye on {parent.name} ({parent.condition})
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold">Hi {child.name}</h1>
+          <p className="text-sm text-black/50 dark:text-white/50 mt-1">
+            Keeping an eye on {parent.name} ({parent.condition})
+          </p>
+        </div>
+        <p className="text-sm text-black/40 dark:text-white/40 shrink-0 pt-1">{formatFullDate()}</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

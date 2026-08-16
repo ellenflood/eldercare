@@ -2,8 +2,10 @@ import Link from "next/link";
 import { Card, CardTitle, StatPill } from "@/components/Card";
 import Sparkline from "@/components/Sparkline";
 import StatusBadge from "@/components/StatusBadge";
-import { formatDate, formatDateTime, formatTime } from "@/lib/format";
+import WearableStatusLine from "@/components/WearableStatusLine";
+import { formatDate, formatDateTime, formatFullDate, formatTime } from "@/lib/format";
 import { getAppointments, getDeviceLogs, getDocuments, getParent, getPrescriptions, getReminders } from "@/lib/store";
+import { assessHeartRate, assessSleep } from "@/lib/wearable";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,8 @@ export default function ParentDashboard() {
   const sleep = deviceLogs
     .filter((l) => l.type === "SleepDuration")
     .map((l) => ({ label: formatDate(l.createdAt).slice(0, 6), value: Number(l.value) }));
+  const heartRateAssessment = assessHeartRate(heartRate);
+  const sleepAssessment = assessSleep(sleep);
 
   function latestDoseStatus(prescriptionId: string) {
     const doseReminders = reminders
@@ -32,9 +36,12 @@ export default function ParentDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl w-full px-4 py-8 space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Welcome back, {parent.name}</h1>
-        <p className="text-sm text-black/50 dark:text-white/50 mt-1">{parent.condition} · Age {parent.age}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold">Welcome back, {parent.name}</h1>
+          <p className="text-sm text-black/50 dark:text-white/50 mt-1">{parent.condition} · Age {parent.age}</p>
+        </div>
+        <p className="text-sm text-black/40 dark:text-white/40 shrink-0 pt-1">{formatFullDate()}</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -103,14 +110,16 @@ export default function ParentDashboard() {
 
         <Card>
           <CardTitle>Wearable — Apple Watch</CardTitle>
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div>
               <p className="text-xs text-black/50 dark:text-white/50 mb-1">Heart rate (bpm)</p>
               <Sparkline points={heartRate} color="#ef4444" unit=" bpm" />
+              <WearableStatusLine assessment={heartRateAssessment} />
             </div>
             <div>
               <p className="text-xs text-black/50 dark:text-white/50 mb-1">Sleep duration (hrs)</p>
-              <Sparkline points={sleep} color="#6366f1" unit="h" />
+              <Sparkline points={sleep} color="#6366f1" unit="h" decimals={1} />
+              <WearableStatusLine assessment={sleepAssessment} />
             </div>
           </div>
         </Card>
