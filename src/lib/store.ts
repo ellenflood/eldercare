@@ -92,6 +92,10 @@ export function getReminders(): Reminder[] {
   return [...getStore().reminders].sort((a, b) => a.dueTime.localeCompare(b.dueTime));
 }
 
+export function getReminder(id: string): Reminder | undefined {
+  return getStore().reminders.find((r) => r.id === id);
+}
+
 export function getPrescriptions(): Prescription[] {
   return getStore().prescriptions;
 }
@@ -109,6 +113,12 @@ export function getPrescriptions(): Prescription[] {
  * missed = 2, appointment missed = 5, unanswered urgent-care call = 5.
  * A missed general (non-appointment) call reminder isn't in that table;
  * severity 4 is this build's documented judgment call for that case.
+ *
+ * A CheckIn reminder answered with responseValue 0 ("urgent help needed")
+ * raises severity-5 alert immediately, regardless of due time or status —
+ * unlike the other rules here, this isn't about a *missed* reminder, it's
+ * the parent actively flagging distress, so it can't wait for the standard
+ * missed/unanswered check below.
  */
 export function getAlerts(now: Date = new Date()): Alert[] {
   const store = getStore();
@@ -117,17 +127,33 @@ export function getAlerts(now: Date = new Date()): Alert[] {
   const alerts: Alert[] = [];
 
   for (const reminder of store.reminders) {
+    if (reminder.type === "CheckIn" && reminder.responseValue === 0) {
+      alerts.push({
+        id: `alert-${reminder.id}-urgent`,
+        childId: child.id,
+        type: "Reminder",
+        name: `Urgent: ${reminder.name} — parent asked for help`,
+        severity: 5,
+        sourceType: "Reminder",
+        sourceId: reminder.id,
+        createdAt: reminder.updatedAt,
+        updatedAt: nowIso,
+      });
+      continue;
+    }
+
     if (reminder.dueTime >= nowIso) continue;
     if (reminder.status === "Answered") continue;
 
     if (reminder.relatedType === "Prescription") {
       const prescription = store.prescriptions.find((p) => p.id === reminder.relatedId);
       const severity = prescription?.frequency === "weekly" ? 2 : prescription?.frequency === "monthly" ? 1 : 3;
+      const label = reminder.status === "Deferred" ? "Dose deferred" : "Missed dose";
       alerts.push({
         id: `alert-${reminder.id}`,
         childId: child.id,
         type: "Prescriptions",
-        name: `Missed dose: ${reminder.name}`,
+        name: `${label}: ${reminder.name}`,
         severity,
         sourceType: "Prescription",
         sourceId: prescription?.id ?? reminder.id,
@@ -210,7 +236,18 @@ export function updateAppointmentStatus(id: string, status: Appointment["status"
 
 /**
  * Applies a Twilio DTMF response to whatever the reminder is linked to.
- * Digit "1" = confirm/yes/urgent, "2" = no, "5" = great/all-good.
+ * Valid digits are type-dependent — see ALLOWED_DIGITS in the webhook route,
+ * which rejects anything outside these sets before this function is called:
+ *
+ * - CheckIn: 0 = urgent help needed, 1-5 = wellbeing scale (1 = not well,
+ *   5 = great). Any of these means the call was answered; the scale value
+ *   itself is stored on responseValue for getAlerts to act on.
+ * - Prescriptions: 1 = took it (Answered), 2 = didn't take it (Rejected,
+ *   which still surfaces as a missed-dose alert), 3 = will take it later
+ *   (Deferred).
+ * - Everything else (Appointments, Documents): unchanged legacy behavior —
+ *   digit "2" = Rejected, anything else = Answered, and digit "1" on an
+ *   appointment-linked reminder also marks that appointment Attended.
  */
 export function applyVoiceResponse(reminderId: string, digit: string): Reminder | undefined {
   const store = getStore();
@@ -218,13 +255,27 @@ export function applyVoiceResponse(reminderId: string, digit: string): Reminder 
   if (!reminder) return undefined;
 
   const now = new Date().toISOString();
+  const numericValue = Number(digit);
+  reminder.responseValue = Number.isFinite(numericValue) ? numericValue : null;
+  reminder.updatedAt = now;
+
+  if (reminder.type === "CheckIn") {
+    reminder.status = "Answered";
+    return reminder;
+  }
+
+  if (reminder.type === "Prescriptions") {
+    if (digit === "1") reminder.status = "Answered";
+    else if (digit === "2") reminder.status = "Rejected";
+    else if (digit === "3") reminder.status = "Deferred";
+    return reminder;
+  }
 
   if (digit === "2") {
     reminder.status = "Rejected";
   } else {
     reminder.status = "Answered";
   }
-  reminder.updatedAt = now;
 
   if (reminder.relatedType === "Appointment" && reminder.relatedId) {
     const appointment = store.appointments.find((a) => a.id === reminder.relatedId);

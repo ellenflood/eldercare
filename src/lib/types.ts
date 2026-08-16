@@ -128,7 +128,7 @@ export interface Appointment {
   updatedAt: string;
 }
 
-export type ReminderStatus = "Answered" | "Not Answered" | "Rejected";
+export type ReminderStatus = "Answered" | "Not Answered" | "Rejected" | "Deferred";
 export type ReminderType = "Prescriptions" | "Appointments" | "Documents" | "CheckIn";
 export type ReminderRecipient = "Parent" | "Child" | "Both";
 export type Recurrence = "none" | "daily" | "weekly" | "monthly";
@@ -146,6 +146,10 @@ export interface Reminder {
   relatedId: string | null;
   recipient: ReminderRecipient;
   recurrence: Recurrence;
+  /** Raw DTMF digit (as a number) from the last Twilio response, per-type meaning:
+   *  CheckIn: 0 = urgent help needed, 1-5 = wellbeing scale (1 = not well, 5 = great).
+   *  Prescriptions: 1 = took it, 2 = didn't take it, 3 = will take it later. */
+  responseValue?: number | null;
   createdAt: string;
   updatedAt: string;
 }
