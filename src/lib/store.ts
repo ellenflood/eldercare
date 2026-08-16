@@ -287,6 +287,27 @@ export function deleteAppointment(id: string): void {
   }
 }
 
+export function addDevice(input: { type: string; brand: string; model: string }): Device {
+  const store = getStore();
+  const device: Device = {
+    id: `device-${crypto.randomUUID()}`,
+    parentId: store.parents[0].id,
+    type: input.type,
+    brand: input.brand,
+    model: input.model,
+    deviceId: `${input.brand.slice(0, 3).toUpperCase()}-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
+    createdAt: new Date().toISOString(),
+  };
+  store.devices.push(device);
+  return device;
+}
+
+export function deleteDevice(id: string): void {
+  const store = getStore();
+  store.devices = store.devices.filter((d) => d.id !== id);
+  store.deviceLogs = store.deviceLogs.filter((l) => l.deviceId !== id);
+}
+
 /**
  * Applies a Twilio DTMF response to whatever the reminder is linked to.
  * Valid digits are type-dependent — see ALLOWED_DIGITS in the webhook route,

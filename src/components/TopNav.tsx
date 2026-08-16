@@ -8,6 +8,7 @@ const PARENT_LINKS = [
   { href: "/parent/calendar", label: "Calendar" },
   { href: "/parent/appointments", label: "Appointments" },
   { href: "/parent/prescriptions", label: "Prescriptions" },
+  { href: "/parent/wearables", label: "Wearables" },
   { href: "/parent/documents", label: "Documents" },
   { href: "/parent/account", label: "Account" },
 ];

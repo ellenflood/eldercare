@@ -4,9 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
   addAppointment,
+  addDevice,
   addDocument,
   addPrescription,
   deleteAppointment,
+  deleteDevice,
   deletePrescription,
   getParent,
   getReminder,
@@ -103,6 +105,31 @@ export async function uploadDocumentAction(formData: FormData) {
   });
 
   revalidatePath("/parent/documents");
+  revalidatePath("/parent");
+}
+
+const WEARABLE_BRAND_MODELS: Record<string, string> = {
+  Apple: "Apple Watch Series 9",
+  Garmin: "Garmin Venu 3",
+  Oura: "Oura Ring Gen 4",
+  Fitbit: "Fitbit Charge 6",
+};
+
+export async function connectDeviceAction(formData: FormData) {
+  const brand = String(formData.get("brand") ?? "");
+  const model = WEARABLE_BRAND_MODELS[brand];
+  if (!model) return;
+
+  addDevice({ type: "Wearable", brand, model });
+  revalidatePath("/parent/wearables");
+  revalidatePath("/parent");
+}
+
+export async function disconnectDeviceAction(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  deleteDevice(id);
+  revalidatePath("/parent/wearables");
   revalidatePath("/parent");
 }
 

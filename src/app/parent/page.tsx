@@ -147,7 +147,9 @@ export default function ParentDashboard() {
         </Card>
 
         <Card>
-          <CardTitle>Wearable — Apple Watch</CardTitle>
+          <CardTitle action={<Link href="/parent/wearables" className="text-xs text-muted-foreground hover:underline">View all</Link>}>
+            Wearable — Apple Watch
+          </CardTitle>
           <div className="space-y-5">
             <div>
               <p className="text-xs text-muted-foreground mb-1">Heart rate (bpm)</p>
