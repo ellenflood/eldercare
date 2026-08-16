@@ -25,8 +25,8 @@ export default function Home() {
         <span className="rounded-full border border-border px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Demo v1
         </span>
-        <h1 className="text-[3.375rem] font-semibold tracking-tight text-green-900 dark:text-green-400">WithYou</h1>
-        <p className="text-muted-foreground max-w-md">Care management wherever you are</p>
+        <h1 className="not-italic text-[4.4rem] font-semibold tracking-tight text-green-900 dark:text-green-400">WithYou</h1>
+        <p className="text-xl font-medium text-foreground max-w-md">Care management wherever you are</p>
 
         <div className="grid sm:grid-cols-2 gap-4 w-full mt-4">
           <Link
