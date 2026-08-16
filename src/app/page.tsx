@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getChild, getParent } from "@/lib/store";
 
@@ -8,7 +9,18 @@ export default function Home() {
   const child = getChild();
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 py-16">
+    <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6 py-16">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/hero-care.jpg"
+          alt=""
+          fill
+          priority
+          className="scale-110 object-cover object-[70%_30%] blur-2xl opacity-40 dark:opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
+      </div>
+
       <main className="w-full max-w-xl flex flex-col items-center text-center gap-6">
         <span className="rounded-full border border-border px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Demo v1
