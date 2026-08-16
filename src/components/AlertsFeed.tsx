@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Alert } from "@/lib/types";
+import CallAgainButton from "@/components/CallAgainButton";
 import { formatDateTime } from "@/lib/format";
 
 function severityStyle(severity: number): string {
@@ -33,9 +34,12 @@ export default function AlertsFeed({ alerts }: { alerts: { alert: Alert; href: s
               {alert.type} · {formatDateTime(alert.createdAt)}
             </p>
           </div>
-          <span className={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 ${severityStyle(alert.severity)}`}>
-            Severity {alert.severity}
-          </span>
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <span className={`text-xs font-semibold px-2 py-1 rounded-full ${severityStyle(alert.severity)}`}>
+              Severity {alert.severity}
+            </span>
+            <CallAgainButton reminderId={alert.reminderId} />
+          </div>
         </li>
       ))}
     </ul>

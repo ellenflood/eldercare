@@ -181,6 +181,8 @@ export interface Alert {
   severity: number;
   sourceType: AlertSourceType;
   sourceId: string;
+  /** The Reminder actually driving this alert — always set, even when sourceType is Prescription (sourceId is the prescription's id there, not the reminder's). Lets "Call again" target the right Reminder regardless of alert type. */
+  reminderId: string;
   createdAt: string;
   updatedAt: string;
 }

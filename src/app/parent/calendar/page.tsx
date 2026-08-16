@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card } from "@/components/Card";
-import MonthCalendar from "@/components/MonthCalendar";
+import MonthCalendar, { toDateKey } from "@/components/MonthCalendar";
 import { formatDate, formatTime } from "@/lib/format";
 import { getAppointments, getDocuments, getPrescriptions, getReminders } from "@/lib/store";
 
@@ -67,11 +67,18 @@ export default function CalendarPage() {
 
   events.sort((a, b) => a.date.localeCompare(b.date));
 
+  const eventsByDay = new Map<string, CalendarEvent[]>();
+  for (const event of events) {
+    const key = toDateKey(new Date(event.date));
+    eventsByDay.set(key, [...(eventsByDay.get(key) ?? []), event]);
+  }
+
   return (
     <div className="mx-auto max-w-3xl w-full px-4 py-8 space-y-6">
       <h1 className="text-2xl font-semibold">Calendar</h1>
       <p className="text-sm text-black/50 dark:text-white/50">
-        Appointments, bill due dates, and prescription refills in one view.
+        Appointments, bill due dates, and prescription refills in one view. Click a date with something on it
+        to jump to the details below.
       </p>
 
       <Card>
@@ -80,22 +87,30 @@ export default function CalendarPage() {
 
       <Card>
         <p className="text-xs uppercase tracking-wide text-black/40 dark:text-white/40 mb-2">Agenda</p>
-        <ul className="divide-y divide-black/5 dark:divide-white/10">
-          {events.map((e, i) => (
-            <li key={i} className="py-3 flex items-center gap-4">
-              <div className="w-20 shrink-0 text-sm font-medium">{formatDate(e.date)}</div>
-              <div className="flex-1">
-                <Link href={e.href} className="text-sm font-medium hover:underline">
-                  {e.title}
-                </Link>
-                <p className="text-xs text-black/40 dark:text-white/40">
-                  {e.detail} · {formatTime(e.date)}
-                </p>
-              </div>
-              <span className={`text-xs font-medium px-2 py-1 rounded-full shrink-0 ${KIND_COLOR[e.kind]}`}>{e.kind}</span>
-            </li>
+        <div className="divide-y divide-black/5 dark:divide-white/10">
+          {[...eventsByDay.entries()].map(([dayKey, dayEvents]) => (
+            <div key={dayKey} id={`day-${dayKey}`} className="py-3 scroll-mt-24">
+              <p className="text-sm font-semibold mb-2">{formatDate(dayEvents[0].date)}</p>
+              <ul className="space-y-3">
+                {dayEvents.map((e, i) => (
+                  <li key={i} className="flex items-center gap-4">
+                    <div className="flex-1">
+                      <Link href={e.href} className="text-sm font-medium hover:underline">
+                        {e.title}
+                      </Link>
+                      <p className="text-xs text-black/40 dark:text-white/40">
+                        {e.detail} · {formatTime(e.date)}
+                      </p>
+                    </div>
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full shrink-0 ${KIND_COLOR[e.kind]}`}>
+                      {e.kind}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </Card>
     </div>
   );

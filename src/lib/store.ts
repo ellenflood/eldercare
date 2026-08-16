@@ -140,6 +140,7 @@ export function getAlerts(now: Date = new Date()): Alert[] {
         severity: 5,
         sourceType: "Reminder",
         sourceId: reminder.id,
+        reminderId: reminder.id,
         createdAt: reminder.updatedAt,
         updatedAt: nowIso,
       });
@@ -161,6 +162,7 @@ export function getAlerts(now: Date = new Date()): Alert[] {
         severity,
         sourceType: "Prescription",
         sourceId: prescription?.id ?? reminder.id,
+        reminderId: reminder.id,
         createdAt: reminder.dueTime,
         updatedAt: nowIso,
       });
@@ -176,6 +178,7 @@ export function getAlerts(now: Date = new Date()): Alert[] {
       severity,
       sourceType: "Reminder",
       sourceId: reminder.id,
+      reminderId: reminder.id,
       createdAt: reminder.dueTime,
       updatedAt: nowIso,
     });
@@ -185,6 +188,25 @@ export function getAlerts(now: Date = new Date()): Alert[] {
 }
 
 // --- Mutations ---------------------------------------------------------------
+
+/**
+ * Re-arms a Reminder as "just contacted again, awaiting a response" — pushes
+ * its due time a few minutes out and resets status to Not Answered. This is
+ * what clears a missed-dose/missed-call alert immediately when the child
+ * clicks "Call again": it's not claiming the parent answered, only that a
+ * fresh attempt is in flight, so the alert legitimately reappears if that
+ * attempt also goes unanswered past the new window.
+ */
+export function placeFollowUpCall(reminderId: string): Reminder | undefined {
+  const store = getStore();
+  const reminder = store.reminders.find((r) => r.id === reminderId);
+  if (!reminder) return undefined;
+  const now = new Date();
+  reminder.status = "Not Answered";
+  reminder.dueTime = new Date(now.getTime() + 5 * 60_000).toISOString();
+  reminder.updatedAt = now.toISOString();
+  return reminder;
+}
 
 export function setReminderStatus(reminderId: string, status: Reminder["status"]): Reminder | undefined {
   const store = getStore();

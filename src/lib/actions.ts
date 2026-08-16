@@ -7,14 +7,46 @@ import {
   addPrescription,
   deletePrescription,
   getParent,
+  getReminder,
+  placeFollowUpCall,
   setReminderStatus,
   updateAppointmentStatus,
 } from "@/lib/store";
 import type { DocumentType, PrescriptionFrequency } from "@/lib/types";
+import { startStudioExecution } from "@/lib/twilio";
 
 export async function markReminderAnswered(reminderId: string) {
   setReminderStatus(reminderId, "Answered");
   revalidatePath("/", "layout");
+}
+
+/**
+ * "Call again" from the Child dashboard's alerts feed. For a CheckIn-type
+ * reminder (the daily check-in call), this places a real outbound call by
+ * starting a Twilio Studio Flow execution — see src/lib/twilio.ts. For every
+ * other alert type, no real-call integration is in scope here (per PRD.md),
+ * so it falls back to locally re-arming the reminder. If the Twilio request
+ * fails (missing env vars, network error), it also falls back so the button
+ * still does something visible during a demo — see server logs to tell the
+ * two cases apart.
+ */
+export async function callAgainAction(formData: FormData) {
+  const reminderId = String(formData.get("reminderId") ?? "");
+  if (!reminderId) return;
+
+  const reminder = getReminder(reminderId);
+  if (!reminder) return;
+
+  if (reminder.type === "CheckIn") {
+    const parent = getParent();
+    const result = await startStudioExecution(parent.phone, { reminderId });
+    if (!result.ok) {
+      console.error(`Twilio Studio call not placed for ${reminderId}, falling back to local re-arm: ${result.error}`);
+    }
+  }
+
+  placeFollowUpCall(reminderId);
+  revalidatePath("/child");
 }
 
 export async function createPrescriptionAction(formData: FormData) {

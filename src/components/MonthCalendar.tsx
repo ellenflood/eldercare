@@ -10,9 +10,16 @@ const KIND_DOT: Record<CalendarEvent["kind"], string> = {
   "Prescription refill": "bg-emerald-500",
 };
 
-const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const KIND_TEXT: Record<CalendarEvent["kind"], string> = {
+  Appointment: "text-indigo-600 dark:text-indigo-400",
+  Bill: "text-red-600 dark:text-red-400",
+  "Prescription refill": "text-emerald-600 dark:text-emerald-400",
+};
 
-function toDateKey(d: Date): string {
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MAX_VISIBLE_PER_DAY = 2;
+
+export function toDateKey(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
@@ -54,23 +61,41 @@ export default function MonthCalendar({ events, today = new Date() }: { events: 
           if (!cell) return <div key={i} />;
           const isToday = cell.key === todayKey;
           const dayEvents = eventsByDate.get(cell.key) ?? [];
-          return (
-            <div
-              key={cell.key}
-              className={`rounded-lg p-1.5 min-h-16 border text-xs ${
-                isToday
-                  ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
-                  : "border-black/5 dark:border-white/10"
-              }`}
-            >
+          const hasEvents = dayEvents.length > 0;
+
+          const cellClassName = `block rounded-lg p-1.5 min-h-16 border text-xs transition-colors ${
+            isToday
+              ? "border-black dark:border-white bg-black/5 dark:bg-white/10"
+              : "border-black/5 dark:border-white/10"
+          } ${hasEvents ? "cursor-pointer hover:border-black/30 dark:hover:border-white/30 hover:bg-black/[0.03] dark:hover:bg-white/[0.06]" : ""}`;
+
+          const cellContent = (
+            <>
               <div className={`text-right ${isToday ? "font-semibold" : "text-black/60 dark:text-white/60"}`}>
                 {cell.dayNumber}
               </div>
-              <div className="flex flex-wrap gap-0.5 mt-1 justify-end">
-                {dayEvents.map((e, idx) => (
-                  <span key={idx} title={e.title} className={`w-1.5 h-1.5 rounded-full ${KIND_DOT[e.kind]}`} />
+              <div className="mt-1 space-y-0.5">
+                {dayEvents.slice(0, MAX_VISIBLE_PER_DAY).map((e, idx) => (
+                  <div key={idx} className={`truncate leading-tight text-[10px] font-medium ${KIND_TEXT[e.kind]}`}>
+                    {e.title}
+                  </div>
                 ))}
+                {dayEvents.length > MAX_VISIBLE_PER_DAY && (
+                  <div className="text-[10px] text-black/40 dark:text-white/40">
+                    +{dayEvents.length - MAX_VISIBLE_PER_DAY} more
+                  </div>
+                )}
               </div>
+            </>
+          );
+
+          return hasEvents ? (
+            <a key={cell.key} href={`#day-${cell.key}`} className={cellClassName}>
+              {cellContent}
+            </a>
+          ) : (
+            <div key={cell.key} className={cellClassName}>
+              {cellContent}
             </div>
           );
         })}
