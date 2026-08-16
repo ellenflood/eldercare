@@ -10,9 +10,9 @@
     "content": {
       "orderedBy": "Dr. Alice Nguyen",
       "collectedDate": "2026-08-05T08:15:00.000Z",
-      "panelName": "Hemoglobin A1C & Lipid Panel",
+      "panelName": "Lipid Panel & Cardiac Risk Markers",
       "values": [
-        { "label": "Hemoglobin A1C", "value": "7.1", "unit": "%", "referenceRange": "< 5.7 (normal), 5.7-6.4 (prediabetes), ≥ 6.5 (diabetes)", "flag": "High" },
+        { "label": "hs-CRP", "value": "2.1", "unit": "mg/L", "referenceRange": "< 1.0 (low risk), 1.0-3.0 (average risk), > 3.0 (high risk)", "flag": "High" },
         { "label": "Total Cholesterol", "value": "188", "unit": "mg/dL", "referenceRange": "< 200", "flag": "Normal" },
         { "label": "LDL Cholesterol", "value": "104", "unit": "mg/dL", "referenceRange": "< 100", "flag": "High" },
         { "label": "HDL Cholesterol", "value": "52", "unit": "mg/dL", "referenceRange": "> 40", "flag": "Normal" },
@@ -27,25 +27,25 @@
     "parentId": "parent-1",
     "link": "/mock-files/endo-visit-summary-aug6.pdf",
     "type": "Visit Summary",
-    "name": "Endocrinology Follow-up - Visit Summary.pdf",
+    "name": "Primary Care Follow-up - Visit Summary.pdf",
     "dueDate": null,
     "appointmentId": "appt-past-1",
     "content": {
-      "provider": "Dr. Alice Nguyen, Endocrinology",
+      "provider": "Dr. Alice Nguyen, Internal Medicine",
       "visitDate": "2026-08-06T14:00:00.000Z",
-      "reasonForVisit": "Routine follow-up for Type 2 Diabetes management.",
+      "reasonForVisit": "Routine follow-up for heart disease management.",
       "vitals": {
         "Blood pressure": "128/78 mmHg",
         "Heart rate": "72 bpm",
         "Weight": "162 lbs",
         "BMI": "26.4"
       },
-      "assessment": "Type 2 diabetes, improving control on current regimen. Hemoglobin A1C down to 7.1% from 7.8% at last visit. LDL cholesterol mildly elevated at 104 mg/dL.",
+      "assessment": "Heart disease, stable on current regimen. Blood pressure well controlled on Lisinopril. LDL cholesterol mildly elevated at 104 mg/dL; hs-CRP modestly elevated, indicating ongoing cardiac risk to monitor.",
       "plan": [
-        "Continue Metformin 500mg daily",
+        "Continue Lisinopril 10mg daily",
         "Add dietary counseling referral for lipid management",
         "Repeat comprehensive metabolic panel and lipid panel prior to next visit",
-        "Continue home glucose monitoring twice daily"
+        "Continue home blood pressure monitoring"
       ],
       "followUp": "Return to clinic in 3 months (early November 2026)."
     },
@@ -57,16 +57,16 @@
     "parentId": "parent-1",
     "link": "/mock-files/endo-visit-bill-aug6.pdf",
     "type": "Bill",
-    "name": "Boston Medical Center - Endocrinology Visit Bill.pdf",
+    "name": "Boston Medical Center - Primary Care Visit Bill.pdf",
     "dueDate": "2026-09-05T00:00:00.000Z",
     "appointmentId": "appt-past-1",
     "content": {
-      "provider": "Boston Medical Center - Endocrinology",
+      "provider": "Boston Medical Center - Internal Medicine",
       "payer": "Blue Cross Blue Shield of MA",
       "serviceDate": "2026-08-06T14:00:00.000Z",
       "lineItems": [
         { "description": "Office visit - established patient (Level 4)", "amount": 220.0 },
-        { "description": "Diabetes management counseling", "amount": 85.0 },
+        { "description": "Cardiac risk management counseling", "amount": 85.0 },
         { "description": "Lab draw fee", "amount": 25.0 }
       ],
       "insuranceAdjustment": -246.0,
@@ -88,7 +88,7 @@
       "collectedDate": "2026-08-05T08:15:00.000Z",
       "panelName": "Comprehensive Metabolic Panel",
       "values": [
-        { "label": "Glucose (fasting)", "value": "142", "unit": "mg/dL", "referenceRange": "70-99", "flag": "High" },
+        { "label": "Glucose (fasting)", "value": "96", "unit": "mg/dL", "referenceRange": "70-99", "flag": "Normal" },
         { "label": "BUN", "value": "18", "unit": "mg/dL", "referenceRange": "7-20", "flag": "Normal" },
         { "label": "Creatinine", "value": "0.9", "unit": "mg/dL", "referenceRange": "0.6-1.1", "flag": "Normal" },
         { "label": "eGFR", "value": "68", "unit": "mL/min/1.73m²", "referenceRange": "> 60", "flag": "Normal" },
