@@ -24,11 +24,11 @@ export default function SignupWizard() {
 
   return (
     <div className="space-y-6">
-      <ol className="flex gap-2 text-xs">
+      <ol className="flex items-stretch gap-2 text-xs">
         {steps.map((label, i) => (
           <li
             key={label}
-            className={`px-2.5 py-1 rounded-full ${
+            className={`flex items-center justify-center text-center px-2.5 py-1 rounded-full ${
               i === step
                 ? "bg-black text-white dark:bg-white dark:text-black"
                 : i < step
